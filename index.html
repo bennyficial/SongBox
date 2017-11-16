@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <style>
+        body,
+        html {
+            height: 100%;
+        }
+
+        .bg {
+            /* The image used */
+            background-image: url("./tea.jpg");
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        h1 {
+            color: rgb(15, 99, 15);
+        }
+
+        h2 {
+            text-align: center;
+            color: black;
+            text-shadow: 2px 2px #faf7f7;
+        }
+
+        img {
+            height: 200px;
+            width: 200px;
+        }
+
+        #vid {
+           text-align:center;
+        }
+
+        #logo {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body class="bg" onload="myNewSrc()">
+    <div class="container">
+        <div id="logo">
+            <!-- <div class="col-sm-12"> -->
+                <h1>Urban <img src="./boba.png" alt="boba"> Teahouse</h1>
+                <button onclick="addSong()">Add song</button>
+            <!-- </div> -->
+        </div>
+
+
+        <div id="section-title" class="row">
+            <!-- <div id = "sideL" class="col-sm-2"> -->
+                <!-- <h1>Drink Specials</h1> -->
+            <!-- </div> -->
+            <!-- <div id = "vid" class="col-sm-6"> -->
+                <video preload="auto" onended="myAddListener()" autoplay controls width="100%" height="100%" title="" poster="">
+                            <source src="" type="video/mp4">
+                            </video>
+            <!-- </div> -->
+            <!-- <div class="col-sm-2">
+            </div> -->
+        </div>
+        <!-- <div class "row"> -->
+            <!-- <div class="col-sm-12"> -->
+                <h2>Brought to you by SongBox</h2>
+            <!-- </div> -->
+        <!-- </div> -->
+
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        var videoSources = ["https://drive.google.com/uc?export=download&id=1U6BXoHOlmq0DQewpw9xDibRXnJ3P_rfZ", "https://drive.google.com/uc?export=download&id=1GGqlwfSLngOyoPleIEBf5JSD_cYUMkPq"];
+
+        var vidSources = ["https://drive.google.com/uc?export=download&id=1vfXWuuaGAP8VQ9EP5jdVA6Xb4ZAGYiwA"]
+
+        var currentIndex = 0;
+        // listener function changes src
+        function myNewSrc() {
+            var myVideo = document.getElementsByTagName('video')[0];
+            myVideo.src = videoSources[currentIndex];
+            myVideo.load();
+        }
+
+
+        // add a listener function to the ended event
+        function myAddListener() {
+            var myVideo = document.getElementsByTagName('video')[0];
+            currentIndex = (currentIndex + 1) % videoSources.length;
+            myVideo.src = videoSources[currentIndex];
+            myVideo.addEventListener('ended', myNewSrc, false);
+
+        }
+
+        function addSong() {
+         
+            videoSources.splice(1, 0, vidSources[0])
+            
+        }
+
+
+
+    </script>
+</body>
+
+</html>
