@@ -8,9 +8,10 @@ import {
     TouchableOpacity,
     AsyncStorage,
     InputGroup,
-    Input,
+
 } from 'react-native';
 import { StackNavigator } from 'react-navigation'
+import { Item, Input, Icon } from 'native-base'
 
 export default class Login extends React.Component {
     constructor (props) {
@@ -27,7 +28,7 @@ export default class Login extends React.Component {
                 <View style={styles.container}>
                     <Text style={styles.header}>SONGBOX </Text>
 
-                    <TextInput 
+                    {/* <TextInput 
                         style={styles.textInput} placeholder='Email Address'
                         autoCapitalize='none'
                         onChangeText={ (email) => this.setState({email})}
@@ -39,7 +40,14 @@ export default class Login extends React.Component {
                         secureTextEntry={true}
                         onChangeText={ (password) => this.setState({password})}
                         underlineColorAndroid='transparent'
-                    />
+                    /> */}
+
+                    <Item>
+                        <Icon active name='home' />
+                        <Input placeholder='Icon Textbox'
+                            onChangeText={ (email) => this.setState({email})}
+                        />
+                    </Item>
 
                     <TouchableOpacity style={styles.btn} onPress={this.login}>
                         <Text> Log in </Text>
