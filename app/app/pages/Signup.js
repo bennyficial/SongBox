@@ -8,9 +8,9 @@ import {
     TouchableOpacity,
     AsyncStorage,
     InputGroup,
-    Input,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import { Item, Input, Icon } from 'native-base'
 
 
 export default class Signup extends React.Component {
@@ -18,6 +18,7 @@ export default class Signup extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
+            name: '',
             email: '',
             password: '',
         }
@@ -29,7 +30,7 @@ export default class Signup extends React.Component {
                 <View style={styles.container}>
                     <Text style={styles.header}>SIGN UP </Text>
 
-                    <TextInput 
+                    {/* <TextInput 
                         style={styles.textInput} placeholder='Email Address'
                         autoCapitalize='none'
                         onChangeText={ (email) => this.setState({email})}
@@ -41,7 +42,36 @@ export default class Signup extends React.Component {
                         secureTextEntry={true}
                         onChangeText={ (password) => this.setState({password})}
                         underlineColorAndroid='transparent'
-                    />
+                    /> */}
+                     <Item >
+                        <Icon active name='md-person' style={styles.inputIcon}/>
+                        <Input style={styles.textInput}
+                            placeholder='Name'
+                            autoCapitalize='none'
+                            underlineColorAndroid='transparent'
+                            onChangeText={ (name) => this.setState({name})}
+                        />
+                    </Item>
+
+                    <Item >
+                        <Icon active name='md-mail' style={styles.inputIcon}/>
+                        <Input style={styles.textInput}
+                            placeholder='Email Address'
+                            autoCapitalize='none'
+                            underlineColorAndroid='transparent'
+                            onChangeText={ (email) => this.setState({email})}
+                        />
+                    </Item>
+
+                    <Item >
+                        <Icon active name='md-lock' style={styles.inputIconLock}/>
+                        <Input style={styles.textInput} 
+                            placeholder='Password'
+                            autoCapitalize='none'
+                            secureTextEntry={true}
+                            onChangeText={ (password) => this.setState({password})}
+                        />
+                    </Item>
 
                     <TouchableOpacity style={styles.btn} onPress={this.login}>
                         <Text> Sign Up </Text>
@@ -78,11 +108,15 @@ const styles = StyleSheet.create({
         fontWeight: '800',
     },
     textInput: {
-        alignSelf: 'stretch',
-        padding: 16,
-        marginBottom: 15,
-        backgroundColor: '#fff',
-        borderRadius: 45
+        color: '#fff'
+    },
+    inputIcon: {
+        color: '#fff',
+        fontSize: 28
+    },
+    inputIconLock: {
+        color: '#fff',
+        fontSize: 38
     },
     btn: {
         alignSelf: 'stretch',

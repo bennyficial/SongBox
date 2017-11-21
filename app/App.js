@@ -36,12 +36,13 @@ export default class App extends React.Component {
     })
     this.setState({fontsAreLoaded: true});
   }
+
   render() {
-    if (this.state.fontsAreLoaded) {
-      return (<RootNavigator />)
+    if (!this.state.fontsAreLoaded) {
+      return false
     }
     return (
-      <Text> Wait </Text>
+      <RootNavigator />
     );
   }
 }
