@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         backgroundColor: '#6A50A7',
         padding: 20,
-        marginTop: 15,
+        marginTop: 55,
         alignItems: 'center',
         borderRadius: 45
     },
