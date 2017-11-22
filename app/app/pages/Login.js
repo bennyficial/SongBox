@@ -8,9 +8,10 @@ import {
     TouchableOpacity,
     AsyncStorage,
     InputGroup,
-    Input,
+    Image,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation'
+import { Item, Input, Icon } from 'native-base'
 
 export default class Login extends React.Component {
     constructor (props) {
@@ -25,21 +26,36 @@ export default class Login extends React.Component {
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.wrapper}>
                 <View style={styles.container}>
+                    <Image 
+                        style={{
+                            alignSelf:'center',
+                            height: 110,
+                            width: 100,
+                            marginTop: 30,
+                            marginBottom: 10
+                        }}
+                        source={require('../../public/images/songbox_logo.png')}
+                    />
                     <Text style={styles.header}>SONGBOX </Text>
+                    <Item >
+                        <Icon active name='md-mail' style={styles.inputIcon}/>
+                        <Input style={styles.textInput}
+                            placeholder='Email Address'
+                            autoCapitalize='none'
+                            underlineColorAndroid='transparent'
+                            onChangeText={ (email) => this.setState({email})}
+                        />
+                    </Item>
 
-                    <TextInput 
-                        style={styles.textInput} placeholder='Email Address'
-                        autoCapitalize='none'
-                        onChangeText={ (email) => this.setState({email})}
-                        underlineColorAndroid='transparent'
-                    />
-
-                    <TextInput 
-                        style={styles.textInput} placeholder='Password'
-                        secureTextEntry={true}
-                        onChangeText={ (password) => this.setState({password})}
-                        underlineColorAndroid='transparent'
-                    />
+                    <Item >
+                        <Icon active name='md-lock' style={styles.inputIconLock}/>
+                        <Input style={styles.textInput} 
+                            placeholder='Password'
+                            autoCapitalize='none'
+                            secureTextEntry={true}
+                            onChangeText={ (password) => this.setState({password})}
+                        />
+                    </Item>
 
                     <TouchableOpacity style={styles.btn} onPress={this.login}>
                         <Text> Log in </Text>
@@ -69,24 +85,27 @@ const styles = StyleSheet.create({
         paddingRight: 40,
     },
     header: {
-        fontSize: 40,
-        marginTop: 60,
-        marginBottom: 60,
+        fontSize: 35,
+        marginBottom: 55,
         color: '#fff',
-        fontWeight: '800',
+        fontWeight: '600',
     },
     textInput: {
-        alignSelf: 'stretch',
-        padding: 16,
-        marginBottom: 15,
-        backgroundColor: '#fff',
-        borderRadius: 45
+        color: '#fff'
+    },
+    inputIcon: {
+        color: '#fff',
+        fontSize: 28
+    },
+    inputIconLock: {
+        color: '#fff',
+        fontSize: 38
     },
     btn: {
         alignSelf: 'stretch',
         backgroundColor: '#6A50A7',
         padding: 20,
-        marginTop: 15,
+        marginTop: 55,
         alignItems: 'center',
         borderRadius: 45
     },
