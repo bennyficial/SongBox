@@ -16,7 +16,8 @@ var userSchema = new Schema({
         validate: [validateEmail, 'Please enter a valid email']
     },
     password: {
-        type: String
+        type: String,
+        required: 'Password is required'
     }
 })
 
@@ -39,5 +40,15 @@ userSchema.pre('save', function(next) {
         next();
     }
 })
+
+userSchema.methods.comparePassword = function (candidatePassword, callback) {
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+        if (err) {
+            return callback(err)
+        }
+        console.log(isMatch)
+        callback(null, isMatch)
+    })
+}
 
 module.exports = mongoose.model('user', userSchema);

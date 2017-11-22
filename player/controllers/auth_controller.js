@@ -14,6 +14,12 @@ function tokenForUser(user) {
     }, config.secret);
 }
 
+exports.signin = function (req, res, next) {
+    var user = req.user
+    console.log(user)
+    res.json({token: tokenForUser(user), user_id: user._id});
+}
+
 
 exports.signup = function(req, res, next) {
     var email = req.body.email;
