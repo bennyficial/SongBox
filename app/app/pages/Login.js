@@ -22,6 +22,17 @@ export default class Login extends React.Component {
         }
     }
 
+    // handle login button press
+    onLoginPress () {
+        // grab email and password from state
+        const { email, password } = this.state;
+        
+        // if email and password is valid
+        if (email && password) {
+            
+        }
+    }
+
     render() {
         return (
             <KeyboardAvoidingView behavior='padding' style={styles.wrapper}>
@@ -44,6 +55,7 @@ export default class Login extends React.Component {
                             autoCapitalize='none'
                             underlineColorAndroid='transparent'
                             onChangeText={ (email) => this.setState({email})}
+                            value={this.state.email}
                         />
                     </Item>
 
@@ -54,10 +66,11 @@ export default class Login extends React.Component {
                             autoCapitalize='none'
                             secureTextEntry={true}
                             onChangeText={ (password) => this.setState({password})}
+                            value={this.state.password}
                         />
                     </Item>
 
-                    <TouchableOpacity style={styles.btn} onPress={this.login}>
+                    <TouchableOpacity style={styles.btn} onPress={this.onLoginPress.bind(this)}>
                         <Text> Log in </Text>
                     </TouchableOpacity>
                     <View style={styles.signupTextCont}>
