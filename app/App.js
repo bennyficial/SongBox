@@ -2,27 +2,40 @@ import React from 'react';
 import { 
   StyleSheet, 
   Text, 
-  View
+  View,
+  StatusBar,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import Login from './app/pages/Login'
 import Signup from './app/pages/Signup'
 
-const RootNavigator = StackNavigator({
-  Home: {
-    screen: Login,
-    navigationOptions: {
-      headerTitle: 'Home'
-    }
-  },
-  Signup: {
-    screen: Signup,
-    navigationOptions: {
-      headerTitle: 'Signup'
+const RootNavigator = StackNavigator(
+  {
+    Home: {
+      screen: Login,
+      navigationOptions: {
+
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: '#26232E'
+        }
+      }
+    },
+    Signup: {
+      screen: Signup,
+      navigationOptions: {
+
+        headerTintColor: 'white',
+        headerStyle: {
+          backgroundColor: '#26232E'
+        }
+      }
     }
   }
-})
+);
+
+// #4A4458
 
 export default class App extends React.Component {
 
@@ -42,7 +55,10 @@ export default class App extends React.Component {
       return false
     }
     return (
-      <RootNavigator />
+      <View style={{flex: 1}}>
+        <StatusBar barStyle='light-content' />
+        <RootNavigator />
+      </View>
     );
   }
 }

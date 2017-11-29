@@ -11,7 +11,10 @@ import {
     Image,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation'
-import { Item, Input, Icon } from 'native-base'
+import { Item, Input, Icon, Spinner } from 'native-base'
+import axios from 'axios'
+import {SIGNIN_URL, SIGNUP_URL} from '../../api'
+
 
 export default class Login extends React.Component {
     constructor (props) {
@@ -19,7 +22,87 @@ export default class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
+            error: '',
+            user_id: '',
+            loading: false,
         }
+    }
+
+    // store jwt in async storage
+    async _onValueChange (key, value) {
+        try {
+            await AsyncStorage.setItem(key, value);
+        } catch (err) {
+            console.log('AsyncStorage Error: ' + err);
+        }
+    }
+
+    // go to protected route with jwt
+    async _getProtectedRoute () {
+        console.log('protectedroute()')
+        const KEY = this.state.user_id;
+        const TOKEN = await AsyncStorage.getItem(KEY);
+        const HEADER = {
+            'Content-Type': 'application/json',
+            'Authorization': TOKEN
+        }
+
+        //get request with jwt
+        axios.get('http://localhost:3001/v1/protected', { headers: HEADER })
+            .then(response => {
+                console.log('PROTECTED')
+                console.log(response)
+            })
+            .catch((err) => {
+                console.log(err)
+                this.setState({ error: err })
+            })
+    }
+
+    // handle login button press
+    onLoginPress () {
+        // grab email and password from state
+        const { email, password } = this.state;
+        
+        // clear out error message, display spinner
+        this.setState({ error: '', loading: true });
+
+        // if email and password is valid
+        if ((email && password) !== '') {
+            axios.post(SIGNIN_URL, {
+                email: email,
+                password: password
+            })
+            .then (response => {
+                const { user_id, token } = response.data;
+                this._onValueChange(user_id, token);
+                this.setState({user_id});
+                this.setState({
+                    email: '',
+                    password: '',
+                    loading: false})
+                // console.log(user_id)
+                // console.log(token)
+                this._getProtectedRoute()
+            })
+            .catch(err => {
+                this.setState({ error: 'Sign in Failed, Please Try Again', loading: false })
+            })
+        } else {
+            this.setState({ error: 'Must provide an email and password', loading: false })
+        }
+    }
+
+    renderButton() {
+        if (this.state.loading) {
+            return <Spinner color='grey'/>;
+        }
+
+        return (
+            <TouchableOpacity style={styles.btn} onPress={this.onLoginPress.bind(this)}>
+                <Text> Log in </Text>
+            </TouchableOpacity>
+        )
     }
 
     render() {
@@ -44,6 +127,7 @@ export default class Login extends React.Component {
                             autoCapitalize='none'
                             underlineColorAndroid='transparent'
                             onChangeText={ (email) => this.setState({email})}
+                            value={this.state.email}
                         />
                     </Item>
 
@@ -54,12 +138,16 @@ export default class Login extends React.Component {
                             autoCapitalize='none'
                             secureTextEntry={true}
                             onChangeText={ (password) => this.setState({password})}
+                            value={this.state.password}
                         />
                     </Item>
 
-                    <TouchableOpacity style={styles.btn} onPress={this.login}>
-                        <Text> Log in </Text>
-                    </TouchableOpacity>
+                    <Text style={styles.errorText}>
+                        {this.state.error}
+                    </Text>
+
+                    {this.renderButton()}
+
                     <View style={styles.signupTextCont}>
                         <Text style={styles.signupText}> Don't have an account yet? </Text> 
                         <Text style={styles.signupBtn}
@@ -105,7 +193,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         backgroundColor: '#6A50A7',
         padding: 20,
-        marginTop: 55,
+        marginTop: 20,
         alignItems: 'center',
         borderRadius: 45
     },
@@ -122,5 +210,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 15,
         fontWeight: '900'
+    },
+    errorText: {
+        fontSize: 20,
+        alignSelf: 'center',
+        color: 'red',
+        marginTop:20,
     }
 })
