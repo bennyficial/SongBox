@@ -13,6 +13,8 @@ import {
 import { StackNavigator } from 'react-navigation'
 import { Item, Input, Icon } from 'native-base'
 
+import {SIGNIN_URL, SIGNUP_URL} from '../../api'
+
 export default class Login extends React.Component {
     constructor (props) {
         super(props);
@@ -29,7 +31,7 @@ export default class Login extends React.Component {
         
         // if email and password is valid
         if (email && password) {
-            
+
         }
     }
 
