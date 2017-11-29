@@ -41,12 +41,10 @@ export default class Login extends React.Component {
         console.log('protectedroute()')
         const KEY = this.state.user_id;
         const TOKEN = await AsyncStorage.getItem(KEY);
-        console.log(TOKEN);
         const HEADER = {
             'Content-Type': 'application/json',
             'Authorization': TOKEN
         }
-        console.log(HEADER)
 
         //get request with jwt
         axios.get('http://localhost:3001/v1/protected', { headers: HEADER })
@@ -56,6 +54,7 @@ export default class Login extends React.Component {
             })
             .catch((err) => {
                 console.log(err)
+                this.setState({ error: err })
             })
     }
 
@@ -64,8 +63,11 @@ export default class Login extends React.Component {
         // grab email and password from state
         const { email, password } = this.state;
         
+        // clear out error message
+        this.setState({ error: ''});
+
         // if email and password is valid
-        if (email && password) {
+        if ((email && password) !== '') {
             axios.post(SIGNIN_URL, {
                 email: email,
                 password: password
@@ -80,8 +82,11 @@ export default class Login extends React.Component {
                 this._getProtectedRoute()
             })
             .catch(err => {
-                alert(err)
+                console.log(err)
+                this.setState({ error: 'Sign in Failed, Please Try Again' })
             })
+        } else {
+            this.setState({ error: 'Authentication Failed' })
         }
     }
 
@@ -121,6 +126,10 @@ export default class Login extends React.Component {
                             value={this.state.password}
                         />
                     </Item>
+
+                    <Text style={styles.errorText}>
+                        {this.state.error}
+                    </Text>
 
                     <TouchableOpacity style={styles.btn} onPress={this.onLoginPress.bind(this)}>
                         <Text> Log in </Text>
@@ -170,7 +179,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         backgroundColor: '#6A50A7',
         padding: 20,
-        marginTop: 55,
+        marginTop: 20,
         alignItems: 'center',
         borderRadius: 45
     },
@@ -187,5 +196,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 15,
         fontWeight: '900'
+    },
+    errorText: {
+        fontSize: 20,
+        alignSelf: 'center',
+        color: 'red',
+        marginTop:20,
     }
 })
