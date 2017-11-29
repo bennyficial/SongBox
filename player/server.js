@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 
-app.use('/api', router);
+app.use('/v1', router);
 
 
 // Send every request to the React app

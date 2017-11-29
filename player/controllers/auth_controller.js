@@ -31,6 +31,7 @@ exports.signup = function(req, res, next) {
 
     // Check if user already exists, send error if they do
     User.findOne({email: email}, function(err, existingUser) {
+        console.log('gg')
         if (err) { 
             return next(err) 
         }

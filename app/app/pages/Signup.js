@@ -10,7 +10,9 @@ import {
     InputGroup,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import { Item, Input, Icon } from 'native-base'
+import { Item, Input, Icon } from 'native-base';
+import {SIGNIN_URL, SIGNUP_URL} from '../../api';
+import axios from 'axios';
 
 
 export default class Signup extends React.Component {
@@ -21,6 +23,26 @@ export default class Signup extends React.Component {
             name: '',
             email: '',
             password: '',
+            error: '',
+        }
+    }
+
+    onSignupPress () {
+        const { name, email, password } = this.state;
+        
+        if (email && password) {
+            axios.post(SIGNUP_URL, {
+                email: email,
+                password: password
+            }).then(response => {
+                const { user_id, token } = response.data
+                
+                if (user_id && token) {
+                    this.props.navigation.goBack();
+                } 
+            }).catch(error => {
+                alert(error);
+            })
         }
     }
 
@@ -73,7 +95,7 @@ export default class Signup extends React.Component {
                         />
                     </Item>
 
-                    <TouchableOpacity style={styles.btn} onPress={this.login}>
+                    <TouchableOpacity style={styles.btn} onPress={this.onSignupPress.bind(this)}>
                         <Text> Sign Up </Text>
                     </TouchableOpacity>
                     <View style={styles.signupTextCont}>

@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation'
 import { Item, Input, Icon } from 'native-base'
+import axios from 'axios'
 
 import {SIGNIN_URL, SIGNUP_URL} from '../../api'
 
@@ -21,7 +22,41 @@ export default class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
+            error: '',
+            user_id: '',
         }
+    }
+
+    // store jwt in async storage
+    async _onValueChange (key, value) {
+        try {
+            await AsyncStorage.setItem(key, value);
+        } catch (err) {
+            console.log('AsyncStorage Error: ' + err);
+        }
+    }
+
+    // go to protected route with jwt
+    async _getProtectedRoute () {
+        console.log('protectedroute()')
+        const KEY = this.state.user_id;
+        const TOKEN = await AsyncStorage.getItem(KEY);
+        console.log(TOKEN);
+        const HEADER = {
+            'Content-Type': 'application/json',
+            'Authorization': TOKEN
+        }
+        console.log(HEADER)
+
+        //get request with jwt
+        axios.get('http://localhost:3001/v1/protected', { headers: HEADER })
+            .then(response => {
+                console.log('PROTECTED')
+                console.log(response)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     // handle login button press
@@ -31,7 +66,22 @@ export default class Login extends React.Component {
         
         // if email and password is valid
         if (email && password) {
-
+            axios.post(SIGNIN_URL, {
+                email: email,
+                password: password
+            })
+            .then (response => {
+                const { user_id, token } = response.data;
+                this._onValueChange(user_id, token);
+                this.setState({user_id});
+                alert('SIGNIN SUCCESS!' )
+                // console.log(user_id)
+                // console.log(token)
+                this._getProtectedRoute()
+            })
+            .catch(err => {
+                alert(err)
+            })
         }
     }
 
