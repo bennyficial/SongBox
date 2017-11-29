@@ -24,6 +24,7 @@ exports.signin = function (req, res, next) {
 exports.signup = function(req, res, next) {
     var email = req.body.email;
     var password = req.body.password;
+    var name = req.body.name;
 
     if (!email || !password) {
         return res.status(422).json({error: 'You must provide an email and password'})
@@ -31,7 +32,6 @@ exports.signup = function(req, res, next) {
 
     // Check if user already exists, send error if they do
     User.findOne({email: email}, function(err, existingUser) {
-        console.log('gg')
         if (err) { 
             return next(err) 
         }
@@ -39,6 +39,7 @@ exports.signup = function(req, res, next) {
             return res.status(422).json({error: 'Email taken'})
         }
         var user = new User({
+            name: name,
             email: email,
             password: password
         });

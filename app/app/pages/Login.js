@@ -11,10 +11,10 @@ import {
     Image,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation'
-import { Item, Input, Icon } from 'native-base'
+import { Item, Input, Icon, Spinner } from 'native-base'
 import axios from 'axios'
-
 import {SIGNIN_URL, SIGNUP_URL} from '../../api'
+
 
 export default class Login extends React.Component {
     constructor (props) {
@@ -24,6 +24,7 @@ export default class Login extends React.Component {
             password: '',
             error: '',
             user_id: '',
+            loading: false,
         }
     }
 
@@ -63,8 +64,8 @@ export default class Login extends React.Component {
         // grab email and password from state
         const { email, password } = this.state;
         
-        // clear out error message
-        this.setState({ error: ''});
+        // clear out error message, display spinner
+        this.setState({ error: '', loading: true });
 
         // if email and password is valid
         if ((email && password) !== '') {
@@ -76,18 +77,32 @@ export default class Login extends React.Component {
                 const { user_id, token } = response.data;
                 this._onValueChange(user_id, token);
                 this.setState({user_id});
-                alert('SIGNIN SUCCESS!' )
+                this.setState({
+                    email: '',
+                    password: '',
+                    loading: false})
                 // console.log(user_id)
                 // console.log(token)
                 this._getProtectedRoute()
             })
             .catch(err => {
-                console.log(err)
-                this.setState({ error: 'Sign in Failed, Please Try Again' })
+                this.setState({ error: 'Sign in Failed, Please Try Again', loading: false })
             })
         } else {
-            this.setState({ error: 'Authentication Failed' })
+            this.setState({ error: 'Must provide an email and password', loading: false })
         }
+    }
+
+    renderButton() {
+        if (this.state.loading) {
+            return <Spinner color='grey'/>;
+        }
+
+        return (
+            <TouchableOpacity style={styles.btn} onPress={this.onLoginPress.bind(this)}>
+                <Text> Log in </Text>
+            </TouchableOpacity>
+        )
     }
 
     render() {
@@ -131,9 +146,8 @@ export default class Login extends React.Component {
                         {this.state.error}
                     </Text>
 
-                    <TouchableOpacity style={styles.btn} onPress={this.onLoginPress.bind(this)}>
-                        <Text> Log in </Text>
-                    </TouchableOpacity>
+                    {this.renderButton()}
+
                     <View style={styles.signupTextCont}>
                         <Text style={styles.signupText}> Don't have an account yet? </Text> 
                         <Text style={styles.signupBtn}

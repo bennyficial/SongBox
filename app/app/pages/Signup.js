@@ -10,7 +10,7 @@ import {
     InputGroup,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import { Item, Input, Icon } from 'native-base';
+import { Item, Input, Icon, Spinner } from 'native-base';
 import {SIGNIN_URL, SIGNUP_URL} from '../../api';
 import axios from 'axios';
 
@@ -24,26 +24,47 @@ export default class Signup extends React.Component {
             email: '',
             password: '',
             error: '',
+            loading: false,
         }
     }
 
     onSignupPress () {
         const { name, email, password } = this.state;
-        
-        if (email && password) {
+
+        //clear form, display spinner
+        this.setState({name: '', email: '', password: '', error: '', loading: true});
+
+        if ((email && password && name) !== '') {
             axios.post(SIGNUP_URL, {
+                name: name,
                 email: email,
                 password: password
             }).then(response => {
                 const { user_id, token } = response.data
-                
+                console.log('name: ' + name)
+                console.log('email: ' + email)
+                console.log('password: ' + password)
                 if (user_id && token) {
                     this.props.navigation.goBack();
                 } 
             }).catch(error => {
-                alert(error);
+                this.setState({ error: 'Sign up failed. Please try again', loading: false})
             })
+        } else {
+            this.setState({error: 'Please fill out the form above', loading: false})
         }
+    }
+
+    renderButton() {
+        if (this.state.loading) {
+            return <Spinner color='grey'/>;
+        }
+
+        return (
+            <TouchableOpacity style={styles.btn} onPress={this.onSignupPress.bind(this)}>
+                <Text> Sign Up </Text>
+            </TouchableOpacity>
+        )
     }
 
     render() {
@@ -95,9 +116,12 @@ export default class Signup extends React.Component {
                         />
                     </Item>
 
-                    <TouchableOpacity style={styles.btn} onPress={this.onSignupPress.bind(this)}>
-                        <Text> Sign Up </Text>
-                    </TouchableOpacity>
+                    <Text style={styles.errorText}>
+                        {this.state.error}
+                    </Text>
+
+                    {this.renderButton()}
+
                     <View style={styles.signupTextCont}>
                         <Text style={styles.signupText}> Already have an account? </Text> 
                         <Text style={styles.signupBtn}
@@ -144,7 +168,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         backgroundColor: '#6A50A7',
         padding: 20,
-        marginTop: 55,
+        marginTop: 20,
         alignItems: 'center',
         borderRadius: 45
     },
@@ -161,5 +185,11 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 15,
         fontWeight: '900'
+    },
+    errorText: {
+        fontSize: 20,
+        alignSelf: 'center',
+        color: 'red',
+        marginTop:20,
     }
 })
