@@ -13,7 +13,7 @@ import {
 import { StackNavigator } from 'react-navigation'
 import { Item, Input, Icon, Spinner } from 'native-base'
 import axios from 'axios'
-import {SIGNIN_URL, SIGNUP_URL} from '../../api'
+import { SIGNIN_URL, SIGNUP_URL, STORAGE_KEY } from '../../api'
 
 
 export default class Login extends React.Component {
@@ -80,7 +80,8 @@ export default class Login extends React.Component {
                 this.setState({
                     email: '',
                     password: '',
-                    loading: false})
+                    loading: false
+                });
                 // console.log(user_id)
                 // console.log(token)
                 this._getProtectedRoute()
