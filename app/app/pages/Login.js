@@ -41,7 +41,7 @@ export default class Login extends React.Component {
     async _getProtectedRoute () {
         console.log('protectedroute()')
         const KEY = this.state.user_id;
-        const TOKEN = await AsyncStorage.getItem(KEY);
+        const TOKEN = await AsyncStorage.getItem(STORAGE_KEY);
         const HEADER = {
             'Content-Type': 'application/json',
             'Authorization': TOKEN
@@ -52,6 +52,7 @@ export default class Login extends React.Component {
             .then(response => {
                 console.log('PROTECTED')
                 console.log(response)
+                alert('SIGNED IN!')
             })
             .catch((err) => {
                 console.log(err)
@@ -65,7 +66,7 @@ export default class Login extends React.Component {
         const { email, password } = this.state;
         
         // clear out error message, display spinner
-        this.setState({ error: '', loading: true });
+        this.setState({ email: '', password: '', error: '', loading: true });
 
         // if email and password is valid
         if ((email && password) !== '') {
@@ -75,7 +76,7 @@ export default class Login extends React.Component {
             })
             .then (response => {
                 const { user_id, token } = response.data;
-                this._onValueChange(user_id, token);
+                this._onValueChange(STORAGE_KEY, token);
                 this.setState({user_id});
                 this.setState({
                     email: '',
