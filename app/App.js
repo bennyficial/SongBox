@@ -9,37 +9,46 @@ import { StackNavigator } from 'react-navigation';
 
 import Login from './app/pages/Login'
 import Signup from './app/pages/Signup'
+import { createRootNavigator } from './app/router';
+import { _isSignedIn } from './app/auth';
 
-const RootNavigator = StackNavigator(
-  {
-    Home: {
-      screen: Login,
-      navigationOptions: {
+// const RootNavigator = StackNavigator(
+//   {
+//     Home: {
+//       screen: Login,
+//       navigationOptions: {
 
-        headerTintColor: 'white',
-        headerStyle: {
-          backgroundColor: '#26232E'
-        }
-      }
-    },
-    Signup: {
-      screen: Signup,
-      navigationOptions: {
+//         headerTintColor: 'white',
+//         headerStyle: {
+//           backgroundColor: '#26232E'
+//         }
+//       }
+//     },
+//     Signup: {
+//       screen: Signup,
+//       navigationOptions: {
 
-        headerTintColor: 'white',
-        headerStyle: {
-          backgroundColor: '#26232E'
-        }
-      }
-    }
-  }
-);
+//         headerTintColor: 'white',
+//         headerStyle: {
+//           backgroundColor: '#26232E'
+//         }
+//       }
+//     }
+//   }
+// );
 
 // #4A4458
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-  state = { fontsAreLoaded: false };
+    this.state = {
+      signedIn: false,
+      checkedSignIn: false,
+      fontsAreLoaded: false,
+    };
+  }
 
   async componentWillMount() {
     await Expo.Font.loadAsync({
@@ -48,16 +57,27 @@ export default class App extends React.Component {
       'Ionicons': require('native-base/Fonts/Ionicons.ttf'),
     })
     this.setState({fontsAreLoaded: true});
+
+    _isSignedIn()
+      .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+      .catch(err => console.log(err))
   }
 
   render() {
-    if (!this.state.fontsAreLoaded) {
+    const { checkedSignIn, signedIn, fontsAreLoaded } = this.state;
+    // console.log('APP.js')
+    // console.log(checkedSignIn)
+    // console.log(signedIn)
+
+    if (!fontsAreLoaded) {
       return false
     }
+    
+    const Layout = createRootNavigator(signedIn);
     return (
       <View style={{flex: 1}}>
         <StatusBar barStyle='light-content' />
-        <RootNavigator />
+        <Layout />
       </View>
     );
   }

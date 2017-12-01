@@ -14,6 +14,7 @@ import { StackNavigator } from 'react-navigation'
 import { Item, Input, Icon, Spinner } from 'native-base'
 import axios from 'axios'
 import { SIGNIN_URL, SIGNUP_URL, STORAGE_KEY } from '../../api'
+import { _onValueChange } from '../auth';
 
 
 export default class Login extends React.Component {
@@ -29,13 +30,13 @@ export default class Login extends React.Component {
     }
 
     // store jwt in async storage
-    async _onValueChange (key, value) {
-        try {
-            await AsyncStorage.setItem(key, value);
-        } catch (err) {
-            console.log('AsyncStorage Error: ' + err);
-        }
-    }
+    // async _onValueChange (key, value) {
+    //     try {
+    //         await AsyncStorage.setItem(key, value);
+    //     } catch (err) {
+    //         console.log('AsyncStorage Error: ' + err);
+    //     }
+    // }
 
     // go to protected route with jwt
     async _getProtectedRoute () {
@@ -46,12 +47,10 @@ export default class Login extends React.Component {
             'Content-Type': 'application/json',
             'Authorization': TOKEN
         }
-
-        //get request with jwt
+        //send get request with jwt in header
         axios.get('http://localhost:3001/v1/protected', { headers: HEADER })
             .then(response => {
                 console.log('PROTECTED')
-                console.log(response)
                 alert('SIGNED IN!')
             })
             .catch((err) => {
@@ -76,16 +75,17 @@ export default class Login extends React.Component {
             })
             .then (response => {
                 const { user_id, token } = response.data;
-                this._onValueChange(STORAGE_KEY, token);
-                this.setState({user_id});
+
+                //store token in async storage
+                _onValueChange(STORAGE_KEY, token);
+
+                // remove spinner
                 this.setState({
                     email: '',
                     password: '',
                     loading: false
                 });
-                // console.log(user_id)
-                // console.log(token)
-                this._getProtectedRoute()
+                this._getProtectedRoute().then(() => this.props.navigation.navigate('SignedIn'))
             })
             .catch(err => {
                 this.setState({ error: 'Sign in Failed, Please Try Again', loading: false })
