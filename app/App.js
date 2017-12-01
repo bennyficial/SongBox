@@ -65,9 +65,6 @@ export default class App extends React.Component {
 
   render() {
     const { checkedSignIn, signedIn, fontsAreLoaded } = this.state;
-    // console.log('APP.js')
-    // console.log(checkedSignIn)
-    // console.log(signedIn)
 
     if (!fontsAreLoaded) {
       return false

@@ -34,6 +34,7 @@ export const SignedIn = TabNavigator(
         screen: List,
         navigationOptions: {
             tabBarLabel: 'List',
+            
         }
     },
     Search: {
@@ -44,10 +45,10 @@ export const SignedIn = TabNavigator(
     }
 },
 {
-    // tabBarPosition: 'top',
+    tabBarPosition: 'top',
     tabBarOptions: {
         style: {
-            paddingTop: 30
+            
         },
         tabStyle: {
             backgroundColor: '#26232E'
