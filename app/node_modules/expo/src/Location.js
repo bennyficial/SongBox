@@ -4,9 +4,7 @@ import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 
 import * as Permissions from './Permissions';
 
-const LocationEventEmitter = new NativeEventEmitter(
-  NativeModules.ExponentLocation
-);
+const LocationEventEmitter = new NativeEventEmitter(NativeModules.ExponentLocation);
 
 type ProviderStatus = {
   locationServicesEnabled: boolean,
@@ -66,9 +64,7 @@ function getProviderStatusAsync(): Promise<ProviderStatus> {
   return ExponentLocation.getProviderStatusAsync();
 }
 
-function getCurrentPositionAsync(
-  options: LocationOptions
-): Promise<LocationData> {
+function getCurrentPositionAsync(options: LocationOptions): Promise<LocationData> {
   // On Android we have a native method for this case.
   if (Platform.OS === 'android') {
     return ExponentLocation.getCurrentPositionAsync(options);
@@ -100,8 +96,8 @@ function getCurrentPositionAsync(
 
 // Start Compass Module
 
-// To simplify, we will call watchHeadingAsync and wait for one update
-// To ensure accuracy, we wait for a couple of watch updates if the data has low accuracy
+// To simplify, we will call watchHeadingAsync and wait for one update To ensure accuracy, we wait
+// for a couple of watch updates if the data has low accuracy
 async function getHeadingAsync() {
   return new Promise(async (resolve, reject) => {
     try {
@@ -217,9 +213,7 @@ async function geocodeAsync(address: string) {
   return ExponentLocation.geocodeAsync(address).catch(error => {
     if (Platform.OS === 'android' && error.code === 'E_NO_GEOCODER') {
       if (!googleApiKey) {
-        throw new Error(
-          error.message + ' Please set a Google API Key to use geocoding.'
-        );
+        throw new Error(error.message + ' Please set a Google API Key to use geocoding.');
       }
       return _googleGeocodeAsync(address);
     }
@@ -227,14 +221,8 @@ async function geocodeAsync(address: string) {
   });
 }
 
-async function reverseGeocodeAsync(location: {
-  latitude: number,
-  longitude: number,
-}) {
-  if (
-    typeof location.latitude !== 'number' ||
-    typeof location.longitude !== 'number'
-  ) {
+async function reverseGeocodeAsync(location: { latitude: number, longitude: number }) {
+  if (typeof location.latitude !== 'number' || typeof location.longitude !== 'number') {
     throw new TypeError(
       'Location should be an object with number properties `latitude` and `longitude`.'
     );
@@ -242,9 +230,7 @@ async function reverseGeocodeAsync(location: {
   return ExponentLocation.reverseGeocodeAsync(location).catch(error => {
     if (Platform.OS === 'android' && error.code === 'E_NO_GEOCODER') {
       if (!googleApiKey) {
-        throw new Error(
-          error.message + ' Please set a Google API Key to use geocoding.'
-        );
+        throw new Error(error.message + ' Please set a Google API Key to use geocoding.');
       }
       return _googleReverseGeocodeAsync(location);
     }
@@ -257,9 +243,7 @@ function setApiKey(apiKey: string) {
 }
 
 async function _googleGeocodeAsync(address: string) {
-  const result = await fetch(
-    `${googleApiUrl}?key=${googleApiKey}&address=${encodeURI(address)}`
-  );
+  const result = await fetch(`${googleApiUrl}?key=${googleApiKey}&address=${encodeURI(address)}`);
   const resultObject = await result.json();
 
   if (resultObject.status !== 'OK') {
@@ -275,10 +259,7 @@ async function _googleGeocodeAsync(address: string) {
   });
 }
 
-async function _googleReverseGeocodeAsync(options: {
-  latitude: number,
-  longitude: number,
-}) {
+async function _googleReverseGeocodeAsync(options: { latitude: number, longitude: number }) {
   const result = await fetch(
     `${googleApiUrl}?key=${googleApiKey}&latlng=${options.latitude},${options.longitude}`
   );
@@ -324,10 +305,7 @@ function watchPosition(
   return watchId;
 }
 
-async function watchPositionAsync(
-  options: LocationOptions,
-  callback: LocationCallback
-) {
+async function watchPositionAsync(options: LocationOptions, callback: LocationCallback) {
   _maybeInitializeEmitterSubscription();
 
   const watchId = _getNextWatchId();
@@ -368,19 +346,15 @@ function getCurrentPosition(
   error?: GeoErrorCallback = () => {},
   options?: LocationOptions = {}
 ): void {
-  invariant(
-    typeof success === 'function',
-    'Must provide a valid success callback.'
-  );
+  invariant(typeof success === 'function', 'Must provide a valid success callback.');
 
   invariant(typeof options === 'object', 'options must be an object.');
 
   _getCurrentPositionAsyncWrapper(success, error, options);
 }
 
-// This function exists to let us continue to return undefined from
-// getCurrentPosition, while still using async/await for the internal
-// implementation of it
+// This function exists to let us continue to return undefined from getCurrentPosition, while still
+// using async/await for the internal implementation of it
 async function _getCurrentPositionAsyncWrapper(
   success: GeoSuccessCallback,
   error: GeoErrorCallback,
@@ -401,15 +375,15 @@ async function _getCurrentPositionAsyncWrapper(
   }
 }
 
-// Polyfill navigator.geolocation for interop with the core react-native and
-// web API approach to geolocation
+// Polyfill navigator.geolocation for interop with the core react-native and web API approach to
+// geolocation
 window.navigator.geolocation = {
   getCurrentPosition,
   watchPosition,
   clearWatch,
 
-  // We don't polyfill stopObserving, this is an internal method that probably
-  // should not even exist in react-native docs
+  // We don't polyfill stopObserving, this is an internal method that probably should not even exist
+  // in react-native docs
   stopObserving: () => {},
 };
 

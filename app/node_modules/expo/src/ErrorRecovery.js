@@ -1,4 +1,5 @@
 // @flow
+
 import { NativeModules } from 'react-native';
 
 const { ExponentErrorRecovery } = NativeModules;

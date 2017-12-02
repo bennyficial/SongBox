@@ -46,8 +46,7 @@ export default class PublisherBanner extends React.Component {
 
 PublisherBanner.propTypes = {
   /**
-   * AdMob iOS library banner size constants
-   * (https://developers.google.com/admob/ios/banner)
+   * AdMob iOS library banner size constants (https://developers.google.com/admob/ios/banner)
    * banner (320x50, Standard Banner for Phones and Tablets)
    * largeBanner (320x100, Large Banner for Phones and Tablets)
    * mediumRectangle (300x250, IAB Medium Rectangle for Phones and Tablets)

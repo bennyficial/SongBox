@@ -15,9 +15,7 @@ it(`adds an "deviceMotionDidUpdate" listener on iOS`, () => {
   const subscription = DeviceMotion.addListener(mockListener);
 
   expect(NativeDeviceMotion.addListener).toHaveBeenCalledTimes(1);
-  expect(NativeDeviceMotion.addListener).toHaveBeenCalledWith(
-    'deviceMotionDidUpdate'
-  );
+  expect(NativeDeviceMotion.addListener).toHaveBeenCalledWith('deviceMotionDidUpdate');
 
   subscription.remove();
   expect(NativeDeviceMotion.removeListeners).toHaveBeenCalledTimes(1);
