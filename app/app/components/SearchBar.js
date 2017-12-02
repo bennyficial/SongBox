@@ -15,7 +15,7 @@ class SearchBar extends Component {
         } = styles;
 
         return (
-            <Container style={containerStyle}>
+            // <Container style={containerStyle}>
                 <Item style={itemStyle}>
                     <Icon name="ios-search" style={{color: 'white'}}/>
                     <Input style={styles.searchTextStyle}
@@ -28,7 +28,7 @@ class SearchBar extends Component {
                     />
                     {this.props.loading ? <Spinner color='grey' /> : <Text></Text>}
                 </Item>
-            </Container>
+            // </Container>
         )
     }
 }

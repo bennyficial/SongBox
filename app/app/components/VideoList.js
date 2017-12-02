@@ -13,7 +13,7 @@ const VideoList = ({ videos }) => {
     ));
 
 	return (
-        <ScrollView>
+        <ScrollView style={{marginTop: 20}}>
             <View style={styles.containerStyle}>
                 {videoItems}
             </View>
