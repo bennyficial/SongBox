@@ -30,7 +30,9 @@ export default class Signup extends React.Component {
 
     onSignupPress () {
         const { name, email, password } = this.state;
-
+        console.log(name)
+        console.log(email)
+        console.log(password)
         //clear form, display spinner
         this.setState({name: '', email: '', password: '', error: '', loading: true});
 
