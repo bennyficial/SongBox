@@ -21,6 +21,7 @@ class SearchBar extends Component {
                     <Input style={styles.searchTextStyle}
                         placeholder='Search Music Video'
                         autoCapitalize='none'
+                        autoComplete='false'
                         underlineColorAndroid='transparent'
                         onChangeText={(term) => this.setState({term})}
                         onSubmitEditing={() => this.props.onPressSearch(this.state.term)}
