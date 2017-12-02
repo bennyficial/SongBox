@@ -1,9 +1,21 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { Button, Icon } from 'native-base';
+import API from '../../api/songAPI'
 
 const VideoListItem = ({ video }) => {
 	const { imageStyle, textStyle, containerStyle, buttonStyle } = styles;
+
+	addToPlayList = (song) => {
+		// console.log(song)
+		API.addSong(song)
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log(err);
+			})
+	}
     return (
     	<View style={containerStyle}>
     	    <Image 
@@ -13,7 +25,7 @@ const VideoListItem = ({ video }) => {
     	    <Text style={textStyle}>{video.snippet.title}</Text>
 			<Button block iconLeft
 				style={buttonStyle}
-				onPress={() => console.log('AAADDDDDD')}
+				onPress={() => this.addToPlayList({title: video.snippet.title, source: video.id.videoId})}
 			>
 				<Icon active name='md-musical-note' />
 				<Text style={{color: 'white'}}> ADD </Text>
