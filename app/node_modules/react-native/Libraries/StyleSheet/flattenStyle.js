@@ -14,11 +14,11 @@
 var invariant = require('fbjs/lib/invariant');
 var ReactNativePropRegistry;
 
-import type { StyleObj } from 'StyleSheetTypes';
+import type { StyleObj } from './StyleSheetTypes';
 
 function getStyle(style) {
   if (ReactNativePropRegistry === undefined) {
-    ReactNativePropRegistry = require('ReactNativePropRegistry');
+    ReactNativePropRegistry = require('../Renderer/shims/ReactNativePropRegistry');
   }
   if (typeof style === 'number') {
     return ReactNativePropRegistry.getByID(style);

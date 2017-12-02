@@ -1,11 +1,7 @@
 import { NativeModules } from 'react-native';
 import Segment from '../Segment';
 
-import {
-  mockPlatformAndroid,
-  mockPlatformIOS,
-  unmockAllProperties,
-} from '../../test/mocking';
+import { mockPlatformAndroid, mockPlatformIOS, unmockAllProperties } from '../../test/mocking';
 
 describe('initialization', () => {
   const mockOptions = {
@@ -20,9 +16,9 @@ describe('initialization', () => {
 
     Segment.initialize(mockOptions);
 
-    expect(
-      NativeModules.ExponentSegment.initializeAndroid
-    ).toHaveBeenCalledWith(mockOptions.androidWriteKey);
+    expect(NativeModules.ExponentSegment.initializeAndroid).toHaveBeenCalledWith(
+      mockOptions.androidWriteKey
+    );
     expect(NativeModules.ExponentSegment.initializeIOS).not.toHaveBeenCalled();
   });
 
@@ -34,8 +30,6 @@ describe('initialization', () => {
     expect(NativeModules.ExponentSegment.initializeIOS).toHaveBeenCalledWith(
       mockOptions.iosWriteKey
     );
-    expect(
-      NativeModules.ExponentSegment.initializeAndroid
-    ).not.toHaveBeenCalled();
+    expect(NativeModules.ExponentSegment.initializeAndroid).not.toHaveBeenCalled();
   });
 });

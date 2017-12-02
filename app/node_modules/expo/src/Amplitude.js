@@ -24,10 +24,7 @@ export default {
     return ExponentAmplitude.logEvent(eventName);
   },
 
-  logEventWithProperties(
-    eventName: string,
-    properties: { [string]: any }
-  ): void {
+  logEventWithProperties(eventName: string, properties: { [string]: any }): void {
     return ExponentAmplitude.logEventWithProperties(eventName, properties);
   },
 

@@ -4,6 +4,7 @@ import {
   Text, 
   View,
   StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -55,6 +56,7 @@ export default class App extends React.Component {
       'Roboto': require('native-base/Fonts/Roboto.ttf'),
       'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
       'Ionicons': require('native-base/Fonts/Ionicons.ttf'),
+      'Material Icons' : require('native-base/Fonts/MaterialIcons.ttf')
     })
     this.setState({fontsAreLoaded: true});
 
@@ -72,7 +74,7 @@ export default class App extends React.Component {
     
     const Layout = createRootNavigator(signedIn);
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#26232E'}}>
         <StatusBar barStyle='light-content' />
         <Layout />
       </View>

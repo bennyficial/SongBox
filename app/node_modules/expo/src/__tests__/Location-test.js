@@ -64,9 +64,7 @@ describe('Location', () => {
   describe('watchPositionAsync', () => {
     it('receives repeated events', async () => {
       let callback = jest.fn();
-      let watchBarrier = createMockFunctionBarrier(
-        ExpoLocation.watchPositionImplAsync
-      );
+      let watchBarrier = createMockFunctionBarrier(ExpoLocation.watchPositionImplAsync);
       await Location.watchPositionAsync({}, callback);
       await watchBarrier;
 
@@ -135,11 +133,7 @@ describe('Location', () => {
           status: 'granted',
         }));
 
-        mockProperty(
-          Location,
-          'getCurrentPositionAsync',
-          jest.fn(async () => {})
-        );
+        mockProperty(Location, 'getCurrentPositionAsync', jest.fn(async () => {}));
 
         let pass;
         let barrier = new Promise(resolve => {
@@ -177,9 +171,7 @@ describe('Location', () => {
           status: 'granted',
         }));
 
-        let watchBarrier = createMockFunctionBarrier(
-          ExpoLocation.watchPositionImplAsync
-        );
+        let watchBarrier = createMockFunctionBarrier(ExpoLocation.watchPositionImplAsync);
 
         let callback = jest.fn();
         let watchId = navigator.geolocation.watchPosition(callback);

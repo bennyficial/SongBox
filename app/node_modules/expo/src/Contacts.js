@@ -137,10 +137,7 @@ const DEFAULT_PAGE_SIZE = 100;
 export async function getContactsAsync(
   { pageSize = DEFAULT_PAGE_SIZE, pageOffset = 0, fields = [] }: Options = {}
 ): Promise<Response> {
-  if (
-    Platform.OS === 'ios' &&
-    (fields.includes(IMAGE) || fields.includes(THUMBNAIL))
-  ) {
+  if (Platform.OS === 'ios' && (fields.includes(IMAGE) || fields.includes(THUMBNAIL))) {
     console.warn(
       'Mind that fetching images for all contacts might be time and resource consuming. ' +
         'Consider using getContactByIdAsync() to get data for a single contact.'
@@ -153,9 +150,7 @@ export async function getContactsAsync(
   });
 }
 
-export async function getContactByIdAsync(
-  { fields = [], id }: Options = {}
-): Promise<Response> {
+export async function getContactByIdAsync({ fields = [], id }: Options = {}): Promise<Response> {
   if (id == null) {
     throw new Error('Please pass an ID as a parameter');
   } else {

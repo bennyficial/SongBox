@@ -11,6 +11,4 @@ type ThreeAxisMeasurement = {
 /**
  * A base class for subscribable sensors that take {x, y, z} measurements.
  */
-export default class ThreeAxisSensor extends DeviceSensor<
-  ThreeAxisMeasurement
-> {}
+export default class ThreeAxisSensor extends DeviceSensor<ThreeAxisMeasurement> {}

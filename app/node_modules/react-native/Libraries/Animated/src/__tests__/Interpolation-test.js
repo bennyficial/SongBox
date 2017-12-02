@@ -9,7 +9,7 @@
 'use strict';
 
 var AnimatedInterpolation = require('../nodes/AnimatedInterpolation');
-var Easing = require('Easing');
+var Easing = require('../Easing');
 
 describe('Interpolation', () => {
   it('should work with defaults', () => {

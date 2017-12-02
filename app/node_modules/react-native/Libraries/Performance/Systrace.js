@@ -103,7 +103,7 @@ const userTimingPolyfill = __DEV__ ? {
 // A hook to get React Stack markers in Systrace.
 const reactDebugToolHook = __DEV__ ? {
   onBeforeMountComponent(debugID) {
-    const ReactComponentTreeHook = require('ReactGlobalSharedState').ReactComponentTreeHook;
+    const ReactComponentTreeHook = require('../Renderer/shims/ReactGlobalSharedState').ReactComponentTreeHook;
     const displayName = ReactComponentTreeHook.getDisplayName(debugID);
     Systrace.beginEvent(`ReactReconciler.mountComponent(${displayName})`);
   },
@@ -111,7 +111,7 @@ const reactDebugToolHook = __DEV__ ? {
     Systrace.endEvent();
   },
   onBeforeUpdateComponent(debugID) {
-    const ReactComponentTreeHook = require('ReactGlobalSharedState').ReactComponentTreeHook;
+    const ReactComponentTreeHook = require('../Renderer/shims/ReactGlobalSharedState').ReactComponentTreeHook;
     const displayName = ReactComponentTreeHook.getDisplayName(debugID);
     Systrace.beginEvent(`ReactReconciler.updateComponent(${displayName})`);
   },
@@ -119,7 +119,7 @@ const reactDebugToolHook = __DEV__ ? {
     Systrace.endEvent();
   },
   onBeforeUnmountComponent(debugID) {
-    const ReactComponentTreeHook = require('ReactGlobalSharedState').ReactComponentTreeHook;
+    const ReactComponentTreeHook = require('../Renderer/shims/ReactGlobalSharedState').ReactComponentTreeHook;
     const displayName = ReactComponentTreeHook.getDisplayName(debugID);
     Systrace.beginEvent(`ReactReconciler.unmountComponent(${displayName})`);
   },
@@ -127,7 +127,7 @@ const reactDebugToolHook = __DEV__ ? {
     Systrace.endEvent();
   },
   onBeginLifeCycleTimer(debugID, timerType) {
-    const ReactComponentTreeHook = require('ReactGlobalSharedState').ReactComponentTreeHook;
+    const ReactComponentTreeHook = require('../Renderer/shims/ReactGlobalSharedState').ReactComponentTreeHook;
     const displayName = ReactComponentTreeHook.getDisplayName(debugID);
     Systrace.beginEvent(`${displayName}.${timerType}()`);
   },
@@ -143,7 +143,7 @@ const Systrace = {
         if (useFiber) {
           global.performance = userTimingPolyfill;
         } else {
-          require('ReactDebugTool').addHook(reactDebugToolHook);
+          require('../Renderer/shims/ReactDebugTool').addHook(reactDebugToolHook);
         }
       }
     }
@@ -163,7 +163,7 @@ const Systrace = {
           if (_useFiber) {
             global.performance = enabled ? userTimingPolyfill : undefined;
           } else {
-            const ReactDebugTool = require('ReactDebugTool');
+            const ReactDebugTool = require('../Renderer/shims/ReactDebugTool');
             if (enabled) {
               ReactDebugTool.addHook(reactDebugToolHook);
             } else {

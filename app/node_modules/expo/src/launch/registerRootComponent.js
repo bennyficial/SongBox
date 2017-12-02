@@ -18,9 +18,7 @@ type InitialProps = {
   [string]: any,
 };
 
-function wrapWithExpoRoot<P: InitialProps>(
-  AppRootComponent: ComponentType<P>
-): ComponentType<P> {
+function wrapWithExpoRoot<P: InitialProps>(AppRootComponent: ComponentType<P>): ComponentType<P> {
   return class ExpoRootComponent extends React.Component<P> {
     componentWillMount() {
       StyleSheet.setStyleAttributePreprocessor('fontFamily', processFontFamily);
@@ -40,8 +38,6 @@ function wrapWithExpoRoot<P: InitialProps>(
   };
 }
 
-export default function registerRootComponent(
-  component: ComponentType<*>
-): void {
+export default function registerRootComponent(component: ComponentType<*>): void {
   AppRegistry.registerComponent('main', () => wrapWithExpoRoot(component));
 }

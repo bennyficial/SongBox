@@ -1,4 +1,4 @@
-/* @flow */
+// @flow
 
 import { PureComponent, Children } from 'react';
 

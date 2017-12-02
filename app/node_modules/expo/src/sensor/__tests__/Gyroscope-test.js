@@ -15,9 +15,7 @@ it(`adds an "gyroscopeDidUpdate" listener on iOS`, () => {
   const subscription = Gyroscope.addListener(mockListener);
 
   expect(NativeGyroscope.addListener).toHaveBeenCalledTimes(1);
-  expect(NativeGyroscope.addListener).toHaveBeenCalledWith(
-    'gyroscopeDidUpdate'
-  );
+  expect(NativeGyroscope.addListener).toHaveBeenCalledWith('gyroscopeDidUpdate');
 
   subscription.remove();
   expect(NativeGyroscope.removeListeners).toHaveBeenCalledTimes(1);

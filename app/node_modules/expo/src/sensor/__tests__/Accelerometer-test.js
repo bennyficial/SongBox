@@ -15,9 +15,7 @@ it(`adds an "accelerometerDidUpdate" listener on iOS`, () => {
   const subscription = Accelerometer.addListener(mockListener);
 
   expect(NativeAccelerometer.addListener).toHaveBeenCalledTimes(1);
-  expect(NativeAccelerometer.addListener).toHaveBeenCalledWith(
-    'accelerometerDidUpdate'
-  );
+  expect(NativeAccelerometer.addListener).toHaveBeenCalledWith('accelerometerDidUpdate');
 
   subscription.remove();
   expect(NativeAccelerometer.removeListeners).toHaveBeenCalledTimes(1);

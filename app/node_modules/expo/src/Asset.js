@@ -9,17 +9,14 @@ import Constants from './Constants';
 
 const FS = NativeModules.ExponentFileSystem;
 
-// Return { uri, hash } for an asset's file, picking the correct scale, based on
-// its React Native metadata. If the asset isn't an image just picks the first
-// file.
+// Return { uri, hash } for an asset's file, picking the correct scale, based on its React Native
+// metadata. If the asset isn't an image just picks the first file.
 const pickScale = meta => {
-  // This logic is based on that in AssetSourceResolver.js, we just do it with
-  // our own tweaks for Exponent
+  // This logic is based on that in AssetSourceResolver.js, we just do it with our own tweaks for
+  // Expo
 
   const scale =
-    meta.scales.length > 1
-      ? AssetSourceResolver.pickScale(meta.scales, PixelRatio.get())
-      : 1;
+    meta.scales.length > 1 ? AssetSourceResolver.pickScale(meta.scales, PixelRatio.get()) : 1;
   const index = meta.scales.findIndex(s => s === scale);
   const hash = meta.fileHashes[index] || meta.fileHashes[0];
 
@@ -99,8 +96,7 @@ export default class Asset {
       return Asset.byModule[moduleId];
     }
 
-    // TODO(nikki): Make React Native's AssetRegistry save moduleId so we don't
-    //              have to do this here.
+    // TODO(nikki): Make React Native's AssetRegistry save moduleId so we don't have to do this here
     const meta = AssetRegistry.getAssetByID(moduleId);
     meta.moduleId = moduleId;
     const { uri, hash } = pickScale(meta);
@@ -122,16 +118,13 @@ export default class Asset {
       return;
     }
     if (this.downloading) {
-      await new Promise((resolve, reject) =>
-        this.downloadCallbacks.push({ resolve, reject })
-      );
+      await new Promise((resolve, reject) => this.downloadCallbacks.push({ resolve, reject }));
       return;
     }
     this.downloading = true;
 
     try {
-      const localUri = `${FS.cacheDirectory}ExponentAsset-${this.hash}.${this
-        .type}`;
+      const localUri = `${FS.cacheDirectory}ExponentAsset-${this.hash}.${this.type}`;
       let exists, md5;
       ({ exists, md5 } = await FS.getInfoAsync(localUri, {
         cache: true,

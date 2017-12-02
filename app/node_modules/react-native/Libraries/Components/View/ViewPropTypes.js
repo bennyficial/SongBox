@@ -11,23 +11,23 @@
  */
 'use strict';
 
-const EdgeInsetsPropType = require('EdgeInsetsPropType');
-const PlatformViewPropTypes = require('PlatformViewPropTypes');
+const EdgeInsetsPropType = require('../../StyleSheet/EdgeInsetsPropType');
+const PlatformViewPropTypes = require('./PlatformViewPropTypes');
 const PropTypes = require('prop-types');
-const StyleSheetPropType = require('StyleSheetPropType');
-const ViewStylePropTypes = require('ViewStylePropTypes');
+const StyleSheetPropType = require('../../StyleSheet/StyleSheetPropType');
+const ViewStylePropTypes = require('./ViewStylePropTypes');
 
 const {
   AccessibilityComponentTypes,
   AccessibilityTraits,
-} = require('ViewAccessibility');
+} = require('./ViewAccessibility');
 
 import type {
   AccessibilityComponentType,
   AccessibilityTrait,
-} from 'ViewAccessibility';
-import type {EdgeInsetsProp} from 'EdgeInsetsPropType';
-import type {TVViewProps} from 'TVViewPropTypes';
+} from './ViewAccessibility';
+import type {EdgeInsetsProp} from '../../StyleSheet/EdgeInsetsPropType';
+import type {TVViewProps} from '../AppleTV/TVViewPropTypes';
 
 const stylePropType = StyleSheetPropType(ViewStylePropTypes);
 
