@@ -31,7 +31,7 @@ module.exports = function (app) {
 
   app.get('/api/delete', function (req, res) {
     
-    Customers.findOne().sort({ field: 'asc', _id: 1 }).limit(1).then(res => res.remove()).catch(err => console.log(err))
+    Customers.findOne().sort({ field: 'asc', _id: 1 }).limit(1).then(res => res.remove(), res.send('deleted'))
   })
 
 app.get('/api/songs/:id?', function (req, res) {
