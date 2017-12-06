@@ -9,12 +9,9 @@ const VideoListItem = ({ video }) => {
 	addToPlayList = (song) => {
 		// console.log(song)
 		API.addSong(song)
-			.then(res => {
-				console.log(res);
-			})
-			.catch(err => {
-				console.log(err);
-			})
+	}
+	goToList = () => {
+		this.props.navigate('List')
 	}
     return (
     	<View style={containerStyle}>
