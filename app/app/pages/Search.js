@@ -36,7 +36,7 @@ export default class Search extends React.Component {
                     loading: false,
                     videos: JSON.parse(res.data).items
                 })
-                // console.log(this.state.videos)
+                
             })
             .catch(err => console.log(err))
     }

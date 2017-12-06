@@ -56,7 +56,7 @@ app.get('/api/songs/:id?', function (req, res) {
     var youTube = req.params.song 
    }
      
-    request('https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q='+youTube+'&type=video&videoCategoryId=10&videoDuration=short&fields=items(id(kind%2CvideoId)%2Csnippet(thumbnails%2Ctitle))&key='+ YouTube_key, function (error, response, body) {
+    request('https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q='+youTube+'&type=video&videoCategoryId=10&videoDuration=short&fields=items(id(kind%2CvideoId)%2Csnippet(thumbnails%2Ctitle))&key='+ YouTube_key, function (error, response, body) {
       console.log('error:', error)
       console.log('statusCode:', response && response.statusCode) 
       return res.json(body)

@@ -6,12 +6,10 @@ import API from '../../api/songAPI'
 const VideoListItem = ({ video }) => {
 	const { imageStyle, textStyle, containerStyle, buttonStyle } = styles;
 
-	addToPlayList = (song) => {
+	addToPlayList = (song, callback) => {
 		// console.log(song)
-		API.addSong(song)
-	}
-	goToList = () => {
-		this.props.navigate('List')
+		API.addSong(song);
+
 	}
     return (
     	<View style={containerStyle}>

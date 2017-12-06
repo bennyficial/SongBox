@@ -7,7 +7,7 @@ const VideoList = ({ videos }) => {
 
     const videoItems = videos.map(video => (
         <VideoListItem
-            key={video.snippet.title}
+            key={video.id.videoId}
             video={video}
         />
     ));

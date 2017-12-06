@@ -13,9 +13,9 @@ export default {
   searchSong: function(song) {
     return axios.post(LOCAL+'/api/search/' + song)
   },
-  showSong: function(song) {
+  showSong: function() {
     // console.log(song)
-    return axios.post(LOCAL+'/api/saved', song)
+    return axios.get(LOCAL+'/api/saved')
   },
   recentSong: function() {
     // console.log(song)
