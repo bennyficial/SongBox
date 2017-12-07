@@ -11,7 +11,7 @@ class Customer extends Component {
 
   searchSong () {
     const artist = (this.state.artist).toLowerCase().replace(' ', '+')
-    console.log(artist);
+
     API.searchSong(artist)
       .then(res => this.setState({ foundResult: JSON.parse(res.data) }))
       .catch(err => console.log(err))
@@ -31,7 +31,7 @@ class Customer extends Component {
   }  
 
   displaySong () {
-    console.log(this.state.foundResult)
+    // console.log(this.state.foundResult)
     //tile of the song
     // console.log(this.state.foundResult.items[0].snippet.title)
     //regular size thumbnail

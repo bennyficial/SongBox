@@ -5,7 +5,10 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "axios": "^0.17.1",
+<<<<<<< HEAD
     "lodash.debounce": "^4.0.8",
+=======
+>>>>>>> parent of c453a878... Merge pull request #7 from bennyficial/revert-auth-serverside
     "react": "^16.0.0",
     "react-center-component": "^3.0.0",
     "react-dom": "^16.0.0",
