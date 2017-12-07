@@ -20,19 +20,16 @@ const VideoQueueItem = ({ video, counter }) => {
     console.log('artist: ' + artist);
     console.log('song: ' + song);
     
-    
-
-    
 
     const { containerStyle, songContainerStyle, indexContainerStyle } = styles
     return (
         <View style={containerStyle}>
             <View style={indexContainerStyle}>
-                <Text style={{color: '#E7E7E7', fontWeight: '900', fontSize: 16}}>{counter} </Text>
+                <Text style={{color: '#bababa', fontWeight: '800', fontSize: 16}}>{counter} </Text>
             </View>
             <View style={songContainerStyle}>
-                <Text style={{color: '#E7E7E7', fontWeight: '900', fontSize: 16, marginBottom: 3}}>{song}</Text>
-                <Text style={{color: '#E7E7E7', marginLeft: 3}}>{artist}</Text>
+                <Text style={{color: '#E7E7E7', fontWeight: '800', fontSize: 16, marginBottom: 3}}>{song}</Text>
+                <Text style={{color: '#bababa', marginLeft: 3}}>{artist}</Text>
             </View>
         </View>
     )

@@ -1,12 +1,39 @@
 import React from 'react';
-import { View, Text, Image, Alert } from 'react-native';
+import { View, Text, Image, Alert, TouchableOpacity } from 'react-native';
 import { Button, Icon } from 'native-base';
 import API from '../../api/songAPI';
+import Modal from 'react-native-modal';
 
 
-const VideoListItem = ({ video, oBP }) => {
-	const { imageStyle, textStyle, containerStyle, buttonStyle } = styles;
+class VideoListItem extends React.Component {
+	state = {
+		isModalVisible: false
+	}
+
+	_renderButton = (text, onPress) => (
+		<TouchableOpacity onPress={onPress}>
+		  <View style={styles.button}>
+			<Text>{text}</Text>
+		  </View>
+		</TouchableOpacity>
+	  );
 	
+	  _renderModalContent = () => (
+		<View style={styles.modalContent}>
+		  <Text>Hello!</Text>
+		  {this._renderButton('Close', this._onPressModalButton)}
+		</View>
+	  );
+
+	  _onPressModalButton = () => {
+		  this.setState({isModalVisible: false})
+		  setTimeout(() => {
+			oBP();
+		  }, 500)
+	  }
+
+	  _showModal = () => this.setState({ isModalVisible: true })
+
 	showAlert = (title, msg) => {
 		Alert.alert(
 			' ',
@@ -22,23 +49,79 @@ const VideoListItem = ({ video, oBP }) => {
 		// showAlert();
 		this.oBP()
 	}
-    return (
-    	<View style={containerStyle}>
-    	    <Image 
-                style={imageStyle}
-                source={{ uri: video.snippet.thumbnails.medium.url }}
-    	    />
-    	    <Text style={textStyle}>{video.snippet.title}</Text>
-			<Button block iconLeft
-				style={buttonStyle}
-				onPress={() => addToPlayList({title: video.snippet.title, source: video.id.videoId, thumbnail: video.snippet.thumbnails.default.url})}
-			>
-				<Icon active name='md-musical-note' />
-				<Text style={{color: 'white'}}> ADD </Text>
-			</Button>
-    	</View>
-    );
+	//addToPlayList({title: video.snippet.title, source: video.id.videoId, thumbnail: video.snippet.thumbnails.default.url})
+	render() {
+		const { imageStyle, textStyle, containerStyle, buttonStyle, button, modalContent } = styles;
+		const { video, oBP } = this.props;		
+		console.log(oBP)
+		return(
+			<View style={containerStyle}>
+				<Image 
+					style={imageStyle}
+					source={{ uri: video.snippet.thumbnails.medium.url }}
+				/>
+				<Text style={textStyle}>{video.snippet.title}</Text>
+				<Button block iconLeft
+					style={buttonStyle}
+					onPress={() => this.setState({isModalVisible:true})}
+				>
+					<Icon active name='md-musical-note' />
+					<Text style={{color: 'white'}}> ADD </Text>
+				</Button>
+				<Modal
+		  isVisible={this.state.isModalVisible}
+		  style={styles.bottomModal}
+        //   backdropColor={'red'}
+        //   backdropOpacity={1}
+        //   animationIn={'zoomInDown'}
+        //   animationOut={'zoomOutUp'}
+        //   animationInTiming={1000}
+        //   animationOutTiming={1000}
+        //   backdropTransitionInTiming={1000}
+        //   backdropTransitionOutTiming={1000}
+        >
+          {this._renderModalContent()}
+        </Modal>
+			</View>
+		)
+	}
 }
+
+// const VideoListItem = ({ video, oBP }) => {
+// 	const { imageStyle, textStyle, containerStyle, buttonStyle } = styles;
+	
+// 	showAlert = (title, msg) => {
+// 		Alert.alert(
+// 			' ',
+// 			'Successfully added to the playlist',
+// 			[
+// 				{text: 'Got it', onPress: () => this.goToListOnPress}
+// 			]
+// 		);
+// 	}
+	
+// 	addToPlayList = (song) => {
+// 		API.addSong(song);
+// 		// showAlert();
+// 		this.oBP()
+// 	}
+//     return (
+//     	<View style={containerStyle}>
+//     	    <Image 
+//                 style={imageStyle}
+//                 source={{ uri: video.snippet.thumbnails.medium.url }}
+//     	    />
+//     	    <Text style={textStyle}>{video.snippet.title}</Text>
+// 			<Button block iconLeft
+// 				style={buttonStyle}
+// 				onPress={() => addToPlayList({title: video.snippet.title, source: video.id.videoId, thumbnail: video.snippet.thumbnails.default.url})}
+// 			>
+// 				<Icon active name='md-musical-note' />
+// 				<Text style={{color: 'white'}}> ADD </Text>
+// 			</Button>
+//     	</View>
+//     );
+// }
 
 //video.snippet.thumbnails.default.url
 const styles = {
@@ -58,7 +141,28 @@ const styles = {
 	buttonStyle: {
 		marginTop: 20,
 		backgroundColor: '#6A50A7'
-	}
+	},
+	button: {
+		backgroundColor: 'lightblue',
+		padding: 12,
+		margin: 16,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 4,
+		borderColor: 'rgba(0, 0, 0, 0.1)',
+	  },
+	  modalContent: {
+		backgroundColor: 'white',
+		padding: 22,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 4,
+		borderColor: 'rgba(0, 0, 0, 0.1)',
+	  },
+	  bottomModal: {
+		justifyContent: 'flex-end',
+		margin: 0,
+	  },
 }
 
 export default VideoListItem;

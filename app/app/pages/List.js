@@ -55,7 +55,7 @@ export default class List extends React.Component {
         return (
             <View style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#26232E'}}>
                 {/* <Text style={{color: 'white'}}> LISTLIST </Text> */}
-                <VideoQueue videos={videos} />
+                <VideoQueue videos={videos}/>
             </View>
         )
     }
