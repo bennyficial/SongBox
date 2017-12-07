@@ -27,7 +27,6 @@ class SearchBar extends Component {
                         onSubmitEditing={() => this.props.onPressSearch(this.state.term)}
                         value={this.state.term}
                     />
-                    {this.props.loading ? <Spinner color='grey' /> : <Text></Text>}
                 </Item>
             // </Container>
         )

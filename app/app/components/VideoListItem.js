@@ -1,19 +1,26 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Alert } from 'react-native';
 import { Button, Icon } from 'native-base';
 import API from '../../api/songAPI';
 
 
 const VideoListItem = ({ video, oBP }) => {
 	const { imageStyle, textStyle, containerStyle, buttonStyle } = styles;
-		
-	console.log('VIDEOLISTITEM')
 	
+	showAlert = (title, msg) => {
+		Alert.alert(
+			' ',
+			'Successfully added to the playlist',
+			[
+				{text: 'Got it', onPress: () => this.goToListOnPress}
+			]
+		);
+	}
 	
-	async function addToPlayList (song) {
-		// console.log(song)
-		await API.addSong(song);
-		return 'ADDED'
+	addToPlayList = (song) => {
+		API.addSong(song);
+		// showAlert();
+		this.oBP()
 	}
     return (
     	<View style={containerStyle}>
@@ -24,7 +31,7 @@ const VideoListItem = ({ video, oBP }) => {
     	    <Text style={textStyle}>{video.snippet.title}</Text>
 			<Button block iconLeft
 				style={buttonStyle}
-				onPress={() => addToPlayList({title: video.snippet.title, source: video.id.videoId, thumbnail: video.snippet.thumbnails.default.url}).then(res => console.log('asdf'))}
+				onPress={() => addToPlayList({title: video.snippet.title, source: video.id.videoId, thumbnail: video.snippet.thumbnails.default.url})}
 			>
 				<Icon active name='md-musical-note' />
 				<Text style={{color: 'white'}}> ADD </Text>

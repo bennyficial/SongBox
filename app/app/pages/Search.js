@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TouchableOpacity, Text} from 'react-native';
-import { Item, Icon, Input, Container } from 'native-base';
+import { Item, Icon, Input, Container, Spinner } from 'native-base';
 import { SearchBar, VideoList } from '../components';
 import API from '../../api/songAPI';
 
@@ -58,6 +58,7 @@ export default class Search extends React.Component {
                     loading={loading}
                     onPressSearch={this.onPressSearch}
                 />
+                {this.state.loading ? <Spinner color='grey' /> : <Text></Text>}
                 <VideoList videos={videos} onButtonPress={this.onButtonPress} />
                 {/* <TouchableOpacity
                     onPress={() => this.props.navigation.navigate('List')} >

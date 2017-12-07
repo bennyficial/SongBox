@@ -6,7 +6,7 @@ import VideoListItem from './VideoListItem'
 
 const VideoList = ({ videos, onButtonPress }) => {
     oBP = () => {
-        this.onButtonPress();
+        onButtonPress();
     }
     const videoItems = videos.map(video => (
         <VideoListItem
@@ -21,10 +21,6 @@ const VideoList = ({ videos, onButtonPress }) => {
             <View style={styles.containerStyle}>
                 {videoItems}
             </View>
-            <Button
-                onPress={() => onButtonPress()}>
-                <Text> sdfgsdfads </Text>
-            </Button>
         </ScrollView>
 	);
 };

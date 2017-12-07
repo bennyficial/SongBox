@@ -8,7 +8,7 @@ const VideoQueueItem = ({ video, counter }) => {
     let titleArray = video.title.split(/-|_/);
     let artist = '';
     let song = '';
-    if (titleArray.length > 1) {
+    if (titleArray.length === 2) {
         artist = titleArray[0];
         song = titleArray[1];
     } else {
@@ -28,11 +28,11 @@ const VideoQueueItem = ({ video, counter }) => {
     return (
         <View style={containerStyle}>
             <View style={indexContainerStyle}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}>{counter} </Text>
+                <Text style={{color: '#E7E7E7', fontWeight: '900', fontSize: 16}}>{counter} </Text>
             </View>
             <View style={songContainerStyle}>
-                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15, marginBottom: 3}}>{song}</Text>
-                <Text style={{color: 'white', marginLeft: 3}}>{artist}</Text>
+                <Text style={{color: '#E7E7E7', fontWeight: '900', fontSize: 16, marginBottom: 3}}>{song}</Text>
+                <Text style={{color: '#E7E7E7', marginLeft: 3}}>{artist}</Text>
             </View>
         </View>
     )
@@ -42,7 +42,7 @@ const styles = {
     containerStyle: {
         flex: 1,
         flexDirection: 'row',
-        marginTop: 25
+        marginTop: 30
     },
     songContainerStyle: {
         flexDirection: 'column'

@@ -7,32 +7,22 @@ import API from '../../api/songAPI';
 
 
 export default class List extends React.Component {
+    constructor(props) {
+        super(props)
 
-    state = {
-        videos: [],
-        current: '',
+        this.state = {
+            videos: [],
+            current: '',
+            added: false
+        }
     }
+    
 
     // load list data here
     componentDidMount () {
         alert('renderdd')
         this.fetchListFromServer ()
     }
-
-    // search = term => {
-    //     this.setState({ loading: true });
-    //     const searchTerm = term.toLowerCase().replace(' ', '+');
-        
-    //     API.searchSong(searchTerm)
-    //         .then(res => {
-    //             this.setState({ 
-    //                 loading: false,
-    //                 videos: JSON.parse(res.data).items
-    //             })
-    //             // console.log(this.state.videos)
-    //         })
-    //         .catch(err => console.log(err))
-    // }
 
     fetchListFromServer = () => {
         API.showSong()

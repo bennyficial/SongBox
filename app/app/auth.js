@@ -30,7 +30,6 @@ export const _isSignedIn = () => {
     return new Promise ((resolve, reject) => {
         AsyncStorage.getItem(STORAGE_KEY)
             .then(res => {
-                console.log(res)
                 if (res !== null) {
                     resolve(true);
                 } else {
