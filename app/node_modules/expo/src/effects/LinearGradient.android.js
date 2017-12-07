@@ -11,34 +11,18 @@ import {
 
 export default class LinearGradient extends Component {
   static propTypes = {
-    start: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.number),
-      PropTypes.object,
-    ]),
-    end: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.number),
-      PropTypes.object,
-    ]),
+    start: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.object]),
+    end: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.object]),
     colors: PropTypes.arrayOf(PropTypes.string).isRequired,
     locations: PropTypes.arrayOf(PropTypes.number),
     ...ViewPropTypes,
   };
 
   render() {
-    const {
-      children,
-      colors,
-      end,
-      locations,
-      start,
-      style,
-      ...otherProps
-    } = this.props;
+    const { children, colors, end, locations, start, style, ...otherProps } = this.props;
 
     if (colors && locations && colors.length !== locations.length) {
-      console.warn(
-        'LinearGradient colors and locations props should be arrays of the same length'
-      );
+      console.warn('LinearGradient colors and locations props should be arrays of the same length');
     }
 
     // inherit container borderRadius until this issue is resolved:
@@ -85,7 +69,4 @@ export default class LinearGradient extends Component {
   }
 }
 
-const NativeLinearGradient = requireNativeComponent(
-  'ExponentLinearGradient',
-  null
-);
+const NativeLinearGradient = requireNativeComponent('ExponentLinearGradient', null);

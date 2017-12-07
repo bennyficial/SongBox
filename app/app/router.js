@@ -1,5 +1,6 @@
 import React from 'react';
 import { StackNavigator, TabNavigator } from 'react-navigation';
+import { Icon } from 'native-base';
 
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -28,39 +29,17 @@ export const SignedOut = StackNavigator({
     }
 });
 
-export const SignedIn = TabNavigator(
-{
-    List: {
-        screen: List,
-        navigationOptions: {
-            tabBarLabel: 'List',
-            
-        }
-    },
-    Search: {
-        screen: Search,
-        navigationOptions: {
-            tabBarLabel: 'Search',
-        }
-    }
-},
-{
-    tabBarPosition: 'top',
-    tabBarOptions: {
-        style: {
-            
-        },
-        tabStyle: {
-            backgroundColor: '#26232E'
-        }
-    }
-});
+export const SignedIn = StackNavigator ({
+    List: { screen: List },
+    Search: { screen: Search }
+})
+
 
 export const createRootNavigator = (signedIn = false) => {
     return StackNavigator(
         {
             SignedIn: {
-                screen: SignedIn,
+            screen: SignedIn,
                 navigationOptions: {
                     gesturesEnabled: false
                 }
@@ -76,6 +55,7 @@ export const createRootNavigator = (signedIn = false) => {
             headerMode: 'none',
             mode: 'modal',
             initialRouteName: signedIn ? 'SignedIn' : 'SignedOut'
+            // initialRouteName: 'SignedIn'
         }
     );
 };

@@ -20,11 +20,7 @@ describe(
   )
 );
 
-function declareMagnetometerSpecs(
-  Magnetometer,
-  NativeMagnetometer,
-  eventNames
-) {
+function declareMagnetometerSpecs(Magnetometer, NativeMagnetometer, eventNames) {
   return () => {
     afterEach(() => {
       Magnetometer.removeAllListeners();
@@ -37,9 +33,7 @@ function declareMagnetometerSpecs(
       const subscription = Magnetometer.addListener(mockListener);
 
       expect(NativeMagnetometer.addListener).toHaveBeenCalledTimes(1);
-      expect(NativeMagnetometer.addListener).toHaveBeenCalledWith(
-        eventNames.magnetometerDidUpdate
-      );
+      expect(NativeMagnetometer.addListener).toHaveBeenCalledWith(eventNames.magnetometerDidUpdate);
 
       subscription.remove();
       expect(NativeMagnetometer.removeListeners).toHaveBeenCalledTimes(1);
@@ -53,10 +47,7 @@ function declareMagnetometerSpecs(
       Magnetometer.addListener(mockListener);
 
       const mockEvent = { x: 0.2, y: 0.1, z: 0.3 };
-      Magnetometer._nativeEmitter.emit(
-        eventNames.magnetometerDidUpdate,
-        mockEvent
-      );
+      Magnetometer._nativeEmitter.emit(eventNames.magnetometerDidUpdate, mockEvent);
       expect(mockListener).toHaveBeenCalledWith(mockEvent);
     });
 

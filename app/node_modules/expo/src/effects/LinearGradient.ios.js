@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  ViewPropTypes,
-  processColor,
-  requireNativeComponent,
-} from 'react-native';
+import { ViewPropTypes, processColor, requireNativeComponent } from 'react-native';
 
 export default class LinearGradient extends Component {
   static propTypes = {
-    start: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.number),
-      PropTypes.object,
-    ]),
-    end: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.number),
-      PropTypes.object,
-    ]),
+    start: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.object]),
+    end: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.number), PropTypes.object]),
     colors: PropTypes.arrayOf(PropTypes.string).isRequired,
     locations: PropTypes.arrayOf(PropTypes.number),
     ...ViewPropTypes,
@@ -25,9 +15,7 @@ export default class LinearGradient extends Component {
   render() {
     const { colors, locations, start, end, ...otherProps } = this.props;
     if (colors && locations && colors.length !== locations.length) {
-      console.warn(
-        'LinearGradient colors and locations props should be arrays of the same length'
-      );
+      console.warn('LinearGradient colors and locations props should be arrays of the same length');
     }
 
     // support for current react-native-linear-gradient api
@@ -52,7 +40,4 @@ export default class LinearGradient extends Component {
   }
 }
 
-const NativeLinearGradient = requireNativeComponent(
-  'ExponentLinearGradient',
-  null
-);
+const NativeLinearGradient = requireNativeComponent('ExponentLinearGradient', null);

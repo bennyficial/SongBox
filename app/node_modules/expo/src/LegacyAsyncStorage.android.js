@@ -4,19 +4,14 @@
 var LegacyAsyncStorage = {
   async migrateItems(items) {},
 
-  getItem(
-    key: string,
-    callback?: ?(error: ?Error, result: ?string) => void
-  ): Promise {
+  getItem(key: string, callback?: ?(error: ?Error, result: ?string) => void): Promise {
     return new Promise((resolve, reject) => {
       callback && callback(null, null);
       resolve(null);
     });
   },
 
-  getAllKeys(
-    callback?: ?(error: ?Error, keys: ?Array<string>) => void
-  ): Promise {
+  getAllKeys(callback?: ?(error: ?Error, keys: ?Array<string>) => void): Promise {
     return new Promise((resolve, reject) => {
       callback && callback(null, []);
       resolve([]);

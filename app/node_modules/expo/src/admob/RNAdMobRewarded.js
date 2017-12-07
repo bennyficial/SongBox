@@ -24,10 +24,7 @@ const addEventListener = (type, handler) => {
       );
       break;
     case 'rewardedVideoDidLoad':
-      eventHandlers[type].set(
-        handler,
-        DeviceEventEmitter.addListener(type, handler)
-      );
+      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
       break;
     case 'rewardedVideoDidFailToLoad':
       eventHandlers[type].set(
@@ -38,22 +35,13 @@ const addEventListener = (type, handler) => {
       );
       break;
     case 'rewardedVideoDidOpen':
-      eventHandlers[type].set(
-        handler,
-        DeviceEventEmitter.addListener(type, handler)
-      );
+      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
       break;
     case 'rewardedVideoDidClose':
-      eventHandlers[type].set(
-        handler,
-        DeviceEventEmitter.addListener(type, handler)
-      );
+      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
       break;
     case 'rewardedVideoWillLeaveApplication':
-      eventHandlers[type].set(
-        handler,
-        DeviceEventEmitter.addListener(type, handler)
-      );
+      eventHandlers[type].set(handler, DeviceEventEmitter.addListener(type, handler));
       break;
     default:
       console.log(`Event with type ${type} does not exist.`);

@@ -2,11 +2,7 @@ import { WebBrowser } from 'expo';
 import AuthSession from '../AuthSession';
 import Constants from '../Constants';
 
-import {
-  mockLinking,
-  mockProperty,
-  unmockAllProperties,
-} from '../../test/mocking';
+import { mockLinking, mockProperty, unmockAllProperties } from '../../test/mocking';
 
 function applyMocks() {
   mockProperty(Constants.manifest, 'id', '@example/abc');
@@ -25,16 +21,12 @@ afterEach(() => {
 });
 
 it('returns correct redirect URL from getRedirectUrl', () => {
-  expect(AuthSession.getRedirectUrl()).toEqual(
-    'https://auth.expo.io/@example/abc'
-  );
+  expect(AuthSession.getRedirectUrl()).toEqual('https://auth.expo.io/@example/abc');
 });
 
 it('returns the correct return URL from getDefaultReturnUrl', () => {
   mockProperty(Constants, 'linkingUrl', 'exp://expo.io/@example/abc+');
-  expect(AuthSession.getDefaultReturnUrl()).toEqual(
-    'exp://expo.io/@example/abc+expo-auth-session'
-  );
+  expect(AuthSession.getDefaultReturnUrl()).toEqual('exp://expo.io/@example/abc+expo-auth-session');
 });
 
 it('returns the correct start URL from getStartUrl', () => {
@@ -85,9 +77,7 @@ it('only lets you call startAsync once at a time', async () => {
   let [first, second] = await parallelStartAsyncCalls;
   expect(first).toEqual(normalResponse);
   expect(second).toEqual(lockedResponse);
-  expect(console.warn).toHaveBeenCalledWith(
-    expect.stringMatching(/Only one AuthSession/)
-  );
+  expect(console.warn).toHaveBeenCalledWith(expect.stringMatching(/Only one AuthSession/));
 });
 
 it('returns success with params on redirect', async () => {

@@ -18,7 +18,7 @@ const AnimatedWithChildren = require('./AnimatedWithChildren');
 const NativeAnimatedHelper = require('../NativeAnimatedHelper');
 
 const invariant = require('fbjs/lib/invariant');
-const normalizeColor = require('normalizeColor');
+const normalizeColor = require('../../../StyleSheet/normalizeColor');
 
 type ExtrapolateType = 'extend' | 'identity' | 'clamp';
 
