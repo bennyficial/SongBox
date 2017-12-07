@@ -11,7 +11,7 @@
  */
 'use strict';
 
-import type EventEmitter from 'EventEmitter';
+import type EventEmitter from '../vendor/emitter/EventEmitter';
 
 /**
  * Subscribable provides a mixin for safely subscribing a component to an

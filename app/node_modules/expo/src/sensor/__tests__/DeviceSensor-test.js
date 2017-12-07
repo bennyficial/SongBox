@@ -68,6 +68,27 @@ it(`starts and stops observing on Android`, () => {
   expect(nativeModule.stopObserving).toHaveBeenCalledTimes(1);
 });
 
+it(`starts and stops observing after removing all listeners at once on Android`, () => {
+  mockPlatformAndroid();
+  const nativeModule = new MockNativeSensorModule();
+  const sensor = new DeviceSensor(nativeModule, 'mockDidUpdate');
+
+  expect(nativeModule.startObserving).not.toHaveBeenCalled();
+  expect(nativeModule.stopObserving).not.toHaveBeenCalled();
+
+  // Add listeners
+  sensor.addListener(() => {});
+  expect(nativeModule.startObserving).toHaveBeenCalledTimes(1);
+  sensor.addListener(() => {});
+  expect(nativeModule.startObserving).toHaveBeenCalledTimes(1);
+
+  // Remove listeners
+  expect(nativeModule.stopObserving).not.toHaveBeenCalled();
+  sensor.removeAllListeners();
+  expect(nativeModule.stopObserving).toHaveBeenCalledTimes(1);
+  expect(sensor.hasListeners()).toBe(false);
+});
+
 it(`doesn't manually start and stop observing on iOS`, () => {
   mockPlatformIOS();
   const nativeModule = new MockNativeSensorModule();
@@ -87,6 +108,22 @@ it(`doesn't manually start and stop observing on iOS`, () => {
   expect(nativeModule.stopObserving).not.toHaveBeenCalled();
   subscription2.remove();
   expect(nativeModule.stopObserving).not.toHaveBeenCalled();
+});
+
+it(`doesn't fail when a subscription is removed twice`, () => {
+  mockPlatformIOS();
+  const nativeModule = new MockNativeSensorModule();
+  const sensor = new DeviceSensor(nativeModule, 'mockDidUpdate');
+
+  // Add listeners
+  let subscription = sensor.addListener(() => {});
+  expect(sensor.hasListeners()).toBe(true);
+
+  // Remove listeners
+  subscription.remove();
+  expect(sensor.hasListeners()).toBe(false);
+  expect(() => subscription.remove()).not.toThrow();
+  expect(() => sensor.removeSubscription(subscription)).not.toThrow();
 });
 
 class MockNativeSensorModule {

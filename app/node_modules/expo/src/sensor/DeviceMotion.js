@@ -36,7 +36,4 @@ class DeviceMotionSensor extends DeviceSensor<Measurement> {
 
 export const Gravity = ExponentDeviceMotion.Gravity;
 
-export default new DeviceMotionSensor(
-  ExponentDeviceMotion,
-  'deviceMotionDidUpdate'
-);
+export default new DeviceMotionSensor(ExponentDeviceMotion, 'deviceMotionDidUpdate');

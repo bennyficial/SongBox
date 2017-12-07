@@ -1,11 +1,7 @@
 import { NativeModules } from 'react-native';
 import Facebook from '../Facebook';
 
-import {
-  describeCrossPlatform,
-  mockProperty,
-  unmockAllProperties,
-} from '../../test/mocking';
+import { describeCrossPlatform, mockProperty, unmockAllProperties } from '../../test/mocking';
 
 const fakeReturnValue = { type: 'dismissed' };
 

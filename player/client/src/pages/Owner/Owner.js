@@ -39,8 +39,7 @@ class Owner extends Component {
 
     API.recentSong().then(({ data }) => this.setState({url: youTube + data.source}))
     .catch(err => console.log(err))
-    
-    API.deleteSong().then(res => console.log(res)).catch(err => console.log(err))
+    setTimeout(() => {API.deleteSong().then(res => console.log(res)).catch(err => console.log(err))}, 1000);
 
 
    }

@@ -26,10 +26,7 @@ type FileInfo =
       isDirectory: false,
     };
 
-export function getInfoAsync(
-  fileUri: string,
-  options: { md5?: boolean } = {}
-): Promise<FileInfo> {
+export function getInfoAsync(fileUri: string, options: { md5?: boolean } = {}): Promise<FileInfo> {
   return FS.getInfoAsync(fileUri, options);
 }
 
@@ -37,10 +34,7 @@ export function readAsStringAsync(fileUri: string): Promise<string> {
   return FS.readAsStringAsync(fileUri, {});
 }
 
-export function writeAsStringAsync(
-  fileUri: string,
-  contents: string
-): Promise<void> {
+export function writeAsStringAsync(fileUri: string, contents: string): Promise<void> {
   return FS.writeAsStringAsync(fileUri, contents, {});
 }
 
@@ -51,17 +45,11 @@ export function deleteAsync(
   return FS.deleteAsync(fileUri, options);
 }
 
-export function moveAsync(options: {
-  from: string,
-  to: string,
-}): Promise<void> {
+export function moveAsync(options: { from: string, to: string }): Promise<void> {
   return FS.moveAsync(options);
 }
 
-export function copyAsync(options: {
-  from: string,
-  to: string,
-}): Promise<void> {
+export function copyAsync(options: { from: string, to: string }): Promise<void> {
   return FS.copyAsync(options);
 }
 

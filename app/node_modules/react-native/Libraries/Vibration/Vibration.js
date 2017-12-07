@@ -12,8 +12,8 @@
  */
 'use strict';
 
-var RCTVibration = require('NativeModules').Vibration;
-var Platform = require('Platform');
+var RCTVibration = require('../BatchedBridge/NativeModules').Vibration;
+var Platform = require('../Utilities/Platform');
 
 /**
  * @class

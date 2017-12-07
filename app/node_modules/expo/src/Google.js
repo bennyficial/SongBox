@@ -57,9 +57,7 @@ export async function logInAsync(config: LogInConfig): Promise<LogInResult> {
       ? config.androidStandaloneAppClientId
       : config.androidClientId;
   const iosClientId =
-    Constants.appOwnership === 'standalone'
-      ? config.iosStandaloneAppClientId
-      : config.iosClientId;
+    Constants.appOwnership === 'standalone' ? config.iosStandaloneAppClientId : config.iosClientId;
 
   const logInResult = await Google.logInAsync({
     androidClientId,
@@ -70,14 +68,11 @@ export async function logInAsync(config: LogInConfig): Promise<LogInResult> {
   });
 
   if (behavior === 'web') {
-    // Web login only returns an accessToken so use it to fetch the same info
-    // as the native login does.
-    let userInfoResponse = await fetch(
-      'https://www.googleapis.com/userinfo/v2/me',
-      {
-        headers: { Authorization: `Bearer ${logInResult.accessToken}` },
-      }
-    );
+    // Web login only returns an accessToken so use it to fetch the same info as the native login
+    // does.
+    let userInfoResponse = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+      headers: { Authorization: `Bearer ${logInResult.accessToken}` },
+    });
     userInfoResponse = await userInfoResponse.json();
     return {
       ...logInResult,
