@@ -18,9 +18,10 @@ class VideoListItem extends React.Component {
 		</TouchableOpacity>
 	  );
 	
-	_renderModalContent = () => (
+	_renderModalContent = (title) => (
 		<View style={styles.modalContent}>
-			<Text>Hello!</Text>
+			<Text style={{fontSize: 15, fontWeight: '700'}}>{title}</Text>
+			<Text style={{fontSize: 13}}>is added to a queue</Text>
 			{this._renderButton('Close', this._onPressModalButton)}
 		</View>
 	);
@@ -29,7 +30,7 @@ class VideoListItem extends React.Component {
 		this.setState({isModalVisible: false})
 		setTimeout(() => {
 			oBP();
-		}, 250)
+		}, 650)
 	}
 
 	_addToPlayList = (song) => {
@@ -58,7 +59,7 @@ class VideoListItem extends React.Component {
 					isVisible={this.state.isModalVisible}
 					style={styles.bottomModal}
 				>
-          			{this._renderModalContent()}
+          			{this._renderModalContent(video.snippet.title)}
        			</Modal>
 			</View>
 		)

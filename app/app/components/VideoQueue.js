@@ -23,13 +23,17 @@ const VideoQueue = ({ videos }) => {
         //        {queueItems}
         //     </View>
         // </ScrollView>
-        <View style={{paddingLeft: 15, paddingRight: 15}}>
+        <View style={{flex:1, paddingLeft: 15, paddingRight: 15, paddingBottom: 30}}>
             <Header headerText={'VIDEO QUEUE'} />
-            <ScrollView style={{marginTop: 15}}>
+            {videos.length === 0 
+                ? <View style={{paddingTop: 50, alignItems:'center', justifyContent: 'center'}}><Text style={{fontSize: 20, color: '#e7e7e7'}}> Add videos to watch!</Text></View>
+                : <ScrollView style={{marginTop: 15}}>
                 <View style={styles.containerStyle}>
                     {queueItems}
                 </View>
             </ScrollView>
+            }
+            
         </View>
 	);
 };

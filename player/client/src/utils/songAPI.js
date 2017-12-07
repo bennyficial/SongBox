@@ -13,7 +13,7 @@ export default {
   },
   showSong: function(song) {
     // console.log(song)
-    return axios.post('/api/saved', song)
+    return axios.get('/api/saved', song)
   },
   recentSong: function() {
     // console.log(song)
