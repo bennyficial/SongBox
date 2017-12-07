@@ -20,7 +20,6 @@ export default class List extends React.Component {
 
     // load list data here
     componentDidMount () {
-        alert('renderdd')
         this.fetchListFromServer ()
     }
 

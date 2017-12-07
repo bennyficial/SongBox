@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Button, Icon } from 'native-base';
 import API from '../../api/songAPI';
 import Modal from 'react-native-modal';
@@ -18,42 +18,28 @@ class VideoListItem extends React.Component {
 		</TouchableOpacity>
 	  );
 	
-	  _renderModalContent = () => (
+	_renderModalContent = () => (
 		<View style={styles.modalContent}>
-		  <Text>Hello!</Text>
-		  {this._renderButton('Close', this._onPressModalButton)}
+			<Text>Hello!</Text>
+			{this._renderButton('Close', this._onPressModalButton)}
 		</View>
-	  );
+	);
 
-	  _onPressModalButton = () => {
-		  this.setState({isModalVisible: false})
-		  setTimeout(() => {
+	_onPressModalButton = () => {
+		this.setState({isModalVisible: false})
+		setTimeout(() => {
 			oBP();
-		  }, 500)
-	  }
-
-	  _showModal = () => this.setState({ isModalVisible: true })
-
-	showAlert = (title, msg) => {
-		Alert.alert(
-			' ',
-			'Successfully added to the playlist',
-			[
-				{text: 'Got it', onPress: () => this.goToListOnPress}
-			]
-		);
+		}, 250)
 	}
-	
-	addToPlayList = (song) => {
+
+	_addToPlayList = (song) => {
+		this.setState({isModalVisible:true})
 		API.addSong(song);
-		// showAlert();
-		this.oBP()
 	}
-	//addToPlayList({title: video.snippet.title, source: video.id.videoId, thumbnail: video.snippet.thumbnails.default.url})
+
 	render() {
 		const { imageStyle, textStyle, containerStyle, buttonStyle, button, modalContent } = styles;
 		const { video, oBP } = this.props;		
-		console.log(oBP)
 		return(
 			<View style={containerStyle}>
 				<Image 
@@ -63,25 +49,17 @@ class VideoListItem extends React.Component {
 				<Text style={textStyle}>{video.snippet.title}</Text>
 				<Button block iconLeft
 					style={buttonStyle}
-					onPress={() => this.setState({isModalVisible:true})}
+					onPress={() => 	this._addToPlayList({title: video.snippet.title, source: video.id.videoId, thumbnail: video.snippet.thumbnails.default.url})}
 				>
 					<Icon active name='md-musical-note' />
 					<Text style={{color: 'white'}}> ADD </Text>
 				</Button>
 				<Modal
-		  isVisible={this.state.isModalVisible}
-		  style={styles.bottomModal}
-        //   backdropColor={'red'}
-        //   backdropOpacity={1}
-        //   animationIn={'zoomInDown'}
-        //   animationOut={'zoomOutUp'}
-        //   animationInTiming={1000}
-        //   animationOutTiming={1000}
-        //   backdropTransitionInTiming={1000}
-        //   backdropTransitionOutTiming={1000}
-        >
-          {this._renderModalContent()}
-        </Modal>
+					isVisible={this.state.isModalVisible}
+					style={styles.bottomModal}
+				>
+          			{this._renderModalContent()}
+       			</Modal>
 			</View>
 		)
 	}
