@@ -15,6 +15,7 @@ export default class List extends React.Component {
 
     // load list data here
     componentDidMount () {
+        alert('renderdd')
         this.fetchListFromServer ()
     }
 
@@ -51,6 +52,7 @@ export default class List extends React.Component {
         headerStyle: {
             backgroundColor: '#26232E',
         },
+        headerLeft: null,
         headerRight: (
             <TouchableOpacity onPress={() => navigation.navigate('Search')}>
                 <Icon active name='md-search' style={{fontSize: 28, color: 'white', paddingRight: 10}}/>

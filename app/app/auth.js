@@ -1,6 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import STORAGE_KEY from '../api';
 
+// store jwt in async storage
 export const _onValueChange = async (key, value) => {
     try {
         await AsyncStorage.setItem(key, value);

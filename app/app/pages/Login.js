@@ -29,15 +29,6 @@ export default class Login extends React.Component {
         }
     }
 
-    // store jwt in async storage
-    // async _onValueChange (key, value) {
-    //     try {
-    //         await AsyncStorage.setItem(key, value);
-    //     } catch (err) {
-    //         console.log('AsyncStorage Error: ' + err);
-    //     }
-    // }
-
     // go to protected route with jwt
     async _getProtectedRoute () {
         console.log('protectedroute()')
@@ -50,8 +41,7 @@ export default class Login extends React.Component {
         //send get request with jwt in header
         axios.get('http://localhost:3001/v1/protected', { headers: HEADER })
             .then(response => {
-                console.log('PROTECTED')
-                alert('SIGNED IN!')
+                console.log('SIGNED IN')
             })
             .catch((err) => {
                 console.log(err)

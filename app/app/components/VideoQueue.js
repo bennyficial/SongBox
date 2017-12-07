@@ -17,12 +17,20 @@ const VideoQueue = ({ videos }) => {
     ))
 
 	return (
-        <ScrollView style={{marginTop: 20}}>
+        // <ScrollView style={{marginTop: 20}}>
+        //     <Header headerText={'VIDEO QUEUE'} />
+        //     <View style={styles.containerStyle}>
+        //        {queueItems}
+        //     </View>
+        // </ScrollView>
+        <View style={{paddingLeft: 15, paddingRight: 15}}>
             <Header headerText={'VIDEO QUEUE'} />
-            <View style={styles.containerStyle}>
-               {queueItems}
-            </View>
-        </ScrollView>
+            <ScrollView style={{marginTop: 15}}>
+                <View style={styles.containerStyle}>
+                    {queueItems}
+                </View>
+            </ScrollView>
+        </View>
 	);
 };
 

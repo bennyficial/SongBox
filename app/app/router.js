@@ -34,53 +34,12 @@ export const SignedIn = StackNavigator ({
     Search: { screen: Search }
 })
 
-// export const SignedIn = TabNavigator(
-//     {
-//         List: {
-//             screen: List,
-//             navigationOptions: {
-//                 tabBarLabel: 'List',
-//                 tabBarIcon: ({tintColor}) => (<Icon active name='md-musical-notes' style={{fontSize: 28, color: tintColor}}/>),
-//             }
-//         },
-//         Search: {
-//             screen: Search,
-//             navigationOptions: {
-//                 tabBarLabel: 'Search',
-//                 tabBarIcon: ({tintColor}) => (<Icon active name='md-musical-notes' style={{fontSize: 28, color: tintColor}}/>),
-//             }
-//         }
-//     },
-//     {
-//         tabBarPosition: 'bottom',
-//         animationEnabled: true,
-//         tabBarOptions: {
-//             activeTintColor: '#a483ef',
-//             inactiveTintColor: 'white',
-//             tabStyle: {
-//                 backgroundColor: '#4A4458',
-//                 paddingBottom: 0,
-//                 padding: 0,
-//                 margin: 0,
-//             },
-//             iconStyle: {
-//                 width: 30,
-//                 height: 30,
-//                 paddingTop: 3,
-//             },
-//             labelStyle: {
-//                 paddingBottom: 3,
-//                 fontWeight: '800',
-//             }
-//         }
-//     }
-// );
 
 export const createRootNavigator = (signedIn = false) => {
     return StackNavigator(
         {
             SignedIn: {
-                screen: SignedIn,
+            screen: SignedIn,
                 navigationOptions: {
                     gesturesEnabled: false
                 }

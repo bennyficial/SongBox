@@ -1,14 +1,18 @@
 import React from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { ScrollView, View, StyleSheet, Text } from 'react-native';
+import {Button} from 'native-base';
 import VideoListItem from './VideoListItem'
 
 
-const VideoList = ({ videos }) => {
-
+const VideoList = ({ videos, onButtonPress }) => {
+    oBP = () => {
+        this.onButtonPress();
+    }
     const videoItems = videos.map(video => (
         <VideoListItem
             key={video.id.videoId}
             video={video}
+            oBP={this.oBP}
         />
     ));
 
@@ -17,6 +21,10 @@ const VideoList = ({ videos }) => {
             <View style={styles.containerStyle}>
                 {videoItems}
             </View>
+            <Button
+                onPress={() => onButtonPress()}>
+                <Text> sdfgsdfads </Text>
+            </Button>
         </ScrollView>
 	);
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 import { Item, Icon, Input, Container } from 'native-base';
 import { SearchBar, VideoList } from '../components';
 import API from '../../api/songAPI';
@@ -14,16 +14,23 @@ export default class Search extends React.Component {
         loading: false,
     }
     
-    static navigationOptions = {
-        title: Search,
+    static navigationOptions = ({ navigation }) => ({
+        title: 'Search',
         headerTintColor: 'white',
+        // headerLeft:
+        //     <Icon active name={'ios-return-left'}
+        //     onPress={ () => { navigation.navigate('List') }} />,
         headerStyle: {
             backgroundColor: '#26232E',
         },
-    }
-
+    })
+  
     onPressSearch = term => {
         this.search(term)
+    }
+
+    onButtonPress = () => {
+        this.props.navigation.navigate('List');
     }
 
     search = term => {
@@ -43,13 +50,19 @@ export default class Search extends React.Component {
 
     render () {
         const { loading, videos } = this.state;
+        const { goBack } = this.props.navigation;
+
         return (
             <View style={{flex: 1,backgroundColor: '#26232E'}}>
                 <SearchBar 
                     loading={loading}
                     onPressSearch={this.onPressSearch}
                 />
-                <VideoList videos={videos} />
+                <VideoList videos={videos} onButtonPress={this.onButtonPress} />
+                {/* <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('List')} >
+                    <Text> GO TO LIST </Text>
+                </TouchableOpacity> */}
             </View>
         )
     }

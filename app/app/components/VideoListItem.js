@@ -1,15 +1,19 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { Button, Icon } from 'native-base';
-import API from '../../api/songAPI'
+import API from '../../api/songAPI';
 
-const VideoListItem = ({ video }) => {
+
+const VideoListItem = ({ video, oBP }) => {
 	const { imageStyle, textStyle, containerStyle, buttonStyle } = styles;
-
-	addToPlayList = (song, callback) => {
+		
+	console.log('VIDEOLISTITEM')
+	
+	
+	async function addToPlayList (song) {
 		// console.log(song)
-		API.addSong(song);
-
+		await API.addSong(song);
+		return 'ADDED'
 	}
     return (
     	<View style={containerStyle}>
@@ -20,7 +24,7 @@ const VideoListItem = ({ video }) => {
     	    <Text style={textStyle}>{video.snippet.title}</Text>
 			<Button block iconLeft
 				style={buttonStyle}
-				onPress={() => this.addToPlayList({title: video.snippet.title, source: video.id.videoId})}
+				onPress={() => addToPlayList({title: video.snippet.title, source: video.id.videoId, thumbnail: video.snippet.thumbnails.default.url}).then(res => console.log('asdf'))}
 			>
 				<Icon active name='md-musical-note' />
 				<Text style={{color: 'white'}}> ADD </Text>
@@ -29,6 +33,7 @@ const VideoListItem = ({ video }) => {
     );
 }
 
+//video.snippet.thumbnails.default.url
 const styles = {
 	containerStyle: {
 		marginTop: 50,
