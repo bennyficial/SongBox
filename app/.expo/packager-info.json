@@ -1,8 +1,8 @@
 {
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 2036,
+  "expoServerNgrokUrl": "https://dg-5p4.chrisms91.app.exp.direct",
+  "packagerNgrokUrl": "https://packager.dg-5p4.chrisms91.app.exp.direct",
+  "ngrokPid": 2048
 }
