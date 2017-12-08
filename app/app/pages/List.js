@@ -13,18 +13,30 @@ export default class List extends React.Component {
         this.state = {
             videos: [],
             current: '',
-            added: false
+            added: false,
+            refresh: false,
+            timerId: ''
         }
     }
+
     
 
     // load list data here
     componentDidMount () {
+        // alert('render')
         this.fetchListFromServer ()
-        // setInterval(() =>{
+        // let timerId = setTimeout(function tick() {
+        //     console.log('tick');
+        //     timerId = setTimeout(tick, 2000); // (*)
+        // }, 2000);
+        // this.setState({timerid: timerId})
+        // const checkDB = () => {
         //     console.log('FETCH')
         //     this.fetchListFromServer ()
-        // }, 5000 )
+            
+        // }
+
+        // const interval = setInterval(checkDB, 5000);
     }
 
     fetchListFromServer = () => {
@@ -37,6 +49,10 @@ export default class List extends React.Component {
             .catch(err => {
                 console.log(err);
             })
+    }
+
+    onButtonPress = () => {
+        this.fetchListFromServer ()    
     }
 
     static navigationOptions = ({ navigation }) => ({
@@ -58,7 +74,7 @@ export default class List extends React.Component {
         return (
             <View style={{flex:1, backgroundColor: '#26232E'}}>
                 {/* <Text style={{color: 'white'}}> LISTLIST </Text> */}
-                <VideoQueue videos={videos}/>
+                <VideoQueue videos={videos} onButtonPress={this.onButtonPress}/>
             </View>
         )
     }

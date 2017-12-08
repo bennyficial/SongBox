@@ -57,10 +57,9 @@ app.get("/api/saved", function (req, res) {
               res.send(doc);
           }
       });
-});
+  });
 
 require('./controllers/songController.js')(app)
-
 
 
 // Send every request to the React app
@@ -71,3 +70,4 @@ app.get('*', function (req, res) {
 app.listen(PORT, function () {
   console.log(`🌎 ==> Server now on port ${PORT}!`)
 })
+

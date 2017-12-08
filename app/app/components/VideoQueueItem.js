@@ -15,10 +15,10 @@ const VideoQueueItem = ({ video, counter }) => {
         song = titleArray[0]
     }
     
-    console.log(' ')
-    console.log('original: ' + video.title);
-    console.log('artist: ' + artist);
-    console.log('song: ' + song);
+    // console.log(' ')
+    // console.log('original: ' + video.title);
+    // console.log('artist: ' + artist);
+    // console.log('song: ' + song);
     
 
     const { containerStyle, songContainerStyle, indexContainerStyle } = styles
