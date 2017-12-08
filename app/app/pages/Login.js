@@ -135,7 +135,7 @@ export default class Login extends React.Component {
                     </Item>
 
                     <Text style={styles.errorText}>
-                        {this.state.error}
+                        {this.state.error.toString()}
                     </Text>
 
                     {this.renderButton()}
