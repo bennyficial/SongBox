@@ -36,10 +36,12 @@ class VideoListItem extends React.Component {
 	_addToPlayList = (song) => {
 		this.setState({isModalVisible:true})
 		API.addSong(song)
-			.then(res => console.log(res))
+			.then(res => {
+				console.log(res)
+			})
 			.catch(err => {
 				if (err) throw err
-                console.log(err)
+                console.log('ERR: ' + err)
 			})
 	}
 
@@ -127,7 +129,7 @@ const styles = {
 		backgroundColor: '#6A50A7'
 	},
 	button: {
-		backgroundColor: 'lightblue',
+		backgroundColor: '#6A50A7',
 		padding: 12,
 		margin: 16,
 		justifyContent: 'center',

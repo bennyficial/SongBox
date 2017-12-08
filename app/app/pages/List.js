@@ -54,6 +54,7 @@ export default class List extends React.Component {
 
     onButtonPress = () => {
         this.fetchListFromServer ()
+        console.log(this.state.videos)
     }
 
     static navigationOptions = ({ navigation }) => ({
