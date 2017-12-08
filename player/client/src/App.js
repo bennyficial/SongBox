@@ -1,18 +1,19 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Nav from './components/Nav'
-import Owner from './pages/Owner'
-import Customer from './pages/Customer'
+import Main from './pages/Main'
+import Search from './pages/Search'
+import Playlist from './pages/Playlist';
 
 const App = () =>
   <Router>
     <div>
-      <Nav />
       <Switch>
-        <Route exact path='/' component={Owner} />
-        <Route exact path='/customer' component={Customer} />
+        <Route exact path='/' component={Main} />
+        <Route exact path='/search' component={Search} />
+        <Route exact path='/playlist' component={Playlist} />
       </Switch>
     </div>
   </Router>
 
 export default App
+

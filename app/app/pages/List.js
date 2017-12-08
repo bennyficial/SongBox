@@ -47,12 +47,13 @@ export default class List extends React.Component {
                 })
             })
             .catch(err => {
-                console.log(err);
+                if (err) throw err
+                console.log(err)
             })
     }
 
     onButtonPress = () => {
-        this.fetchListFromServer ()    
+        this.fetchListFromServer ()
     }
 
     static navigationOptions = ({ navigation }) => ({

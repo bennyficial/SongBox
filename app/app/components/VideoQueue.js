@@ -6,7 +6,6 @@ import { Header } from './index';
 
 const VideoQueue = ({ videos, onButtonPress }) => {
 
-    console.log(onButtonPress)
     oBP = () => {
         onButtonPress()
     }

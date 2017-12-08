@@ -5,11 +5,14 @@ const Nav = () =>
     <div className='container-fluid'>
       <div className='navbar-header'>
         <a href='/' >
-          Owner
+          Main
         </a>
         <span />
-        <a href='/customer' >
-          Customer
+        <a href='/search' >
+          
+        </a>
+        <a href='/playlist' >
+          Playlist
         </a>
       </div>
     </div>

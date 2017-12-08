@@ -45,7 +45,10 @@ export default class Search extends React.Component {
                 })
                 
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                if (err) throw err
+                console.log(err)
+            })
     }
 
     render () {
