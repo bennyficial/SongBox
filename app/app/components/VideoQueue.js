@@ -4,8 +4,11 @@ import VideoQueueItem from './VideoQueueItem'
 import { Header } from './index';
 
 
-const VideoQueue = ({ videos }) => {
+const VideoQueue = ({ videos, onButtonPress }) => {
 
+    oBP = () => {
+        onButtonPress()
+    }
     let counter = 1;
 
     const queueItems = videos.map(video => (
@@ -16,6 +19,7 @@ const VideoQueue = ({ videos }) => {
         />
     ))
 
+    
 	return (
         // <ScrollView style={{marginTop: 20}}>
         //     <Header headerText={'VIDEO QUEUE'} />
@@ -24,7 +28,7 @@ const VideoQueue = ({ videos }) => {
         //     </View>
         // </ScrollView>
         <View style={{flex:1, paddingLeft: 15, paddingRight: 15, paddingBottom: 30}}>
-            <Header headerText={'VIDEO QUEUE'} />
+            <Header headerText={'VIDEO QUEUE'} oBP={this.oBP}/>
             {videos.length === 0 
                 ? <View style={{paddingTop: 50, alignItems:'center', justifyContent: 'center'}}><Text style={{fontSize: 20, color: '#e7e7e7'}}> Add videos to watch!</Text></View>
                 : <ScrollView style={{marginTop: 15}}>

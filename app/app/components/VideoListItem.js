@@ -35,7 +35,12 @@ class VideoListItem extends React.Component {
 
 	_addToPlayList = (song) => {
 		this.setState({isModalVisible:true})
-		API.addSong(song);
+		API.addSong(song)
+			.then(res => console.log(res))
+			.catch(err => {
+				if (err) throw err
+                console.log(err)
+			})
 	}
 
 	render() {
