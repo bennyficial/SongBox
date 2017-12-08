@@ -39,7 +39,7 @@ export default class Login extends React.Component {
             'Authorization': TOKEN
         }
         //send get request with jwt in header
-        axios.get('http://localhost:3001/v1/protected', { headers: HEADER })
+        axios.get('https://songbox-server.herokuapp.com/v1/protected', { headers: HEADER })
             .then(response => {
                 console.log('SIGNED IN')
             })

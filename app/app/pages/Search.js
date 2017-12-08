@@ -43,11 +43,10 @@ export default class Search extends React.Component {
                     loading: false,
                     videos: JSON.parse(res.data).items
                 })
-                
             })
             .catch(err => {
-                if (err) throw err
-                console.log(err)
+                if (err) throw err;
+                console.log('ERR: ' + err)
             })
     }
 
