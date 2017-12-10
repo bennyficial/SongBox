@@ -13,7 +13,7 @@ class VideoListItem extends React.Component {
 	_renderButton = (text, onPress) => (
 		<TouchableOpacity onPress={onPress}>
 		  <View style={styles.button}>
-			<Text>{text}</Text>
+			<Text style={{color: 'white',}}>{text}</Text>
 		  </View>
 		</TouchableOpacity>
 	  );
@@ -37,7 +37,7 @@ class VideoListItem extends React.Component {
 		this.setState({isModalVisible:true})
 		API.addSong(song)
 			.then(res => {
-				console.log(res)
+				console.log(res.data)
 			})
 			.catch(err => {
 				if (err) throw err
