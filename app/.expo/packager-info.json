@@ -2,7 +2,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://yx-3bk.chrisms91.app.exp.direct",
+  "packagerNgrokUrl": "https://packager.yx-3bk.chrisms91.app.exp.direct",
+  "ngrokPid": 14035
 }
