@@ -13,8 +13,8 @@ SongBox is crowdsourced video queue application that allows people who are at a 
 - YouTube API
 
 ### Screenshots
-![](./screenshots/1.png)
-![](./screenshots/2.png)
-![](./screenshots/3.png)
-![](./screenshots/4.png)
+![](./screenshots/1.PNG)
+![](./screenshots/2.PNG)
+![](./screenshots/3.PNG)
+![](./screenshots/4.PNG)
 ![](./screenshots/5.png)
